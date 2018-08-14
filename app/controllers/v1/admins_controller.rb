@@ -28,20 +28,16 @@ class V1::AdminsController < ApplicationController
         end               
     end
 
-    def destroy
-        if current_admin
-          current_admin.destroy!
-          render json: { status:"success to delete admin" , result:current_admin }, status: 202  
-        else
-          render json: { status:"Failed to destroy post", result: current_admin }, status: 400  
-        end
+    def delete
+        current_admin.destroy
+        head 204
     end
     
     
     private
 
     def admin_params
-        params.permit(:name, :email, :password, :password_confirmation, :addres, :birth_place, :birth_date)
+        params.permit(:name, :email, :password, :password_confirmation, :address, :birth_place, :birth_date)
     end
 
 end
