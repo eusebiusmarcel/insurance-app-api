@@ -29,20 +29,16 @@ class V1::UsersController < ApplicationController
         end               
     end
 
-    def destroy
-        if current_user
-          current_user.destroy!
-          render json: { status:"success to delete user" , result:current_user }, status: 202  
-        else
-          render json: { status:"Failed to destroy post", result: current_user }, status: 400  
-        end
+    def delete
+        current_user.destroy
+        head 204
     end
     
     
     private
 
     def user_params
-        params.permit(:name, :email, :password, :password_confirmation, :addres, :birth_place, :birth_date)
+        params.permit(:name, :email, :password, :password_confirmation, :address, :birth_place, :birth_date)
     end
    
 end
