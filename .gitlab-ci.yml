@@ -1,0 +1,15 @@
+image: "ruby:2.5.1"
+
+variables:
+  APP_NAME: quind-api
+  HEROKU_PRODUCTION_KEY: 69989b90-c4b3-4d75-9d3d-f743db1bc637
+
+deploy_to_production:
+  type: deploy
+  stage: deploy
+  environment: production
+  script:
+  - gem install dpl
+  - dpl --provider=heroku --app=$APP_NAME --api-key=$HEROKU_PRODUCTION_KEY
+  only:
+  - master
