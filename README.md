@@ -1,4 +1,3 @@
-<<<<<<< f5ce04f41209375f85b682cb945903e016f80e0d
 # README
 
 This README would normally document whatever steps are necessary to get the
@@ -23,6 +22,3 @@ Things you may want to cover:
 * Deployment instructions
 
 * ...
-=======
-initial commit
->>>>>>> initial commit

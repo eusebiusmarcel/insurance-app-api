@@ -20,8 +20,8 @@ ActiveRecord::Schema.define(version: 2018_08_14_080634) do
     t.string "email"
     t.string "password_digest"
     t.string "address"
-    t.string "birth_place"
-    t.string "birth_date"
+    t.string "place_of_birth"
+    t.string "date_of_birth"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -31,8 +31,8 @@ ActiveRecord::Schema.define(version: 2018_08_14_080634) do
     t.string "email"
     t.string "password_digest"
     t.string "address"
-    t.string "birth_place"
-    t.string "birth_date"
+    t.string "place_of_birth"
+    t.string "date_of_birth"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

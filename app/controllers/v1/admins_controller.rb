@@ -37,7 +37,8 @@ class V1::AdminsController < ApplicationController
     private
 
     def admin_params
-        params.permit(:name, :email, :password, :password_confirmation, :address, :birth_place, :birth_date)
+        params.permit(:name, :email, :password, :password_confirmation, 
+                      :address, :place_of_birth, :date_of_birth)
     end
 
 end
