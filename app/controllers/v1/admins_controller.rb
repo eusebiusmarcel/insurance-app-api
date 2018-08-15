@@ -29,7 +29,11 @@ class V1::AdminsController < ApplicationController
     end
 
     def profile
-      render json: { user: @admin }, status: 200
+      if current_admin['id'].to_i == params[:id].to_i
+        render json: { admin: @admin }, status: 200
+      else
+        render json: { status: "Forbidden, You're not allowed to view this profile" }, status: 403
+      end
     end
 
     def delete
@@ -46,7 +50,7 @@ class V1::AdminsController < ApplicationController
     end
 
     def set_user
-      columns = User.attribute_names - ['password_digest', 'email']
+      columns = Admin.attribute_names - ['password_digest', 'email']
       @admin = Admin.select(columns).find(params[:id])
     end
 end
