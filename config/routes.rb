@@ -15,5 +15,6 @@ Rails.application.routes.draw do
     post 'admin/create' => 'admins#create'
     put 'admin/update' => 'admins#update'
     delete 'admin/delete' => 'admins#delete'
+    get 'admin/profile/:id' => 'admins#profile'
   end
 end

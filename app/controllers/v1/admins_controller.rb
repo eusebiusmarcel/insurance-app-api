@@ -1,6 +1,6 @@
 class V1::AdminsController < ApplicationController
     before_action :authenticate_admin, except: :create 
-
+    before_action :set_user, only: [:profile]
     def index
         admins = Admin.all
         render json: admins, status: :ok 
@@ -28,6 +28,10 @@ class V1::AdminsController < ApplicationController
         end               
     end
 
+    def profile
+      render json: { user: @admin }, status: 200
+    end
+
     def delete
         current_admin.destroy
         head 204
@@ -41,4 +45,8 @@ class V1::AdminsController < ApplicationController
                       :address, :place_of_birth, :date_of_birth)
     end
 
+    def set_user
+      columns = User.attribute_names - ['password_digest', 'email']
+      @admin = Admin.select(columns).find(params[:id])
+    end
 end
