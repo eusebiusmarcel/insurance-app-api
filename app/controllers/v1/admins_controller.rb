@@ -30,7 +30,7 @@ class V1::AdminsController < ApplicationController
 
     def profile
       if current_admin['id'].to_i == params[:id].to_i
-        render json: { admin: @admin }, status: 200
+        render json: { admin: @admin.as_json(except: ['password_digest', 'email']) }, status: 200
       else
         render json: { status: "Forbidden, You're not allowed to view this profile" }, status: 403
       end
@@ -50,7 +50,6 @@ class V1::AdminsController < ApplicationController
     end
 
     def set_user
-      columns = Admin.attribute_names - ['password_digest', 'email']
-      @admin = Admin.select(columns).find(params[:id])
+      @admin = Admin.find(params[:id])
     end
 end
