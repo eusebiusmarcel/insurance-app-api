@@ -29,7 +29,8 @@ class V1::AdminsController < ApplicationController
     private
 
     def admin_params
-        params.permit(:name, :email, :password, :address, :place_of_birth, :date_of_birth)
+        params.permit(:name, :email, :password, :address, :place_of_birth,
+                      :date_of_birth, :gender)
     end
 
     def update_params
