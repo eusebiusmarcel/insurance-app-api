@@ -12,26 +12,27 @@ class V1::AdminsController < ApplicationController
 
     def create
         admin = Admin.new(admin_params)
-        if admin.save
-            render json: { status: "Add Admin Success", result: admin }, status: 201
-        else
-            render json: { status: "Error Add Admin", result: admin.errors }, status: 422
-        end
+        admin.save!
+        render json: { status: "Add Admin Success", result: admin }, status: 201
     end
 
     def update
-        current_admin.update(admin_params)
-        if current_admin.save
-            render json: { status: "Update Success", result: current_admin }, status: 202
-        else
-            render json: { status: "Update Error", result: current_admin.errors }, status: 422
-        end
+        current_admin.update!(update_params)
+        render json: { status: "Update Success", result: current_admin }, status: 202
+    end
+
+    def update_password
+        current_admin.process_update_password(params[:old_password], params[:password].to_s)
+        render json: { status: 'OK', message: 'Password telah berhasil diubah' }, status: 202
     end
 
     private
 
     def admin_params
-        params.permit(:name, :email, :password, :password_confirmation, 
-                      :address, :place_of_birth, :date_of_birth)
+        params.permit(:name, :email, :password, :address, :place_of_birth, :date_of_birth)
+    end
+
+    def update_params
+        params.permit(:email, :address)
     end
 end
