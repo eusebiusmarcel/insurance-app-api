@@ -28,11 +28,6 @@ class V1::UsersController < ApplicationController
         end
     end
 
-    def delete
-        current_user.destroy
-        render json: { status: "Account Deleted" }, status: 200
-    end
-    
     private
 
     def user_params

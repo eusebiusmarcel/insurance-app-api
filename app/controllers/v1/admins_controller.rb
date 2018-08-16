@@ -28,11 +28,6 @@ class V1::AdminsController < ApplicationController
         end
     end
 
-    def delete
-        current_admin.destroy
-        render json: { status: "Account Deleted" }, status: 200
-    end
-
     private
 
     def admin_params
