@@ -1,4 +1,5 @@
 class Admin < ApplicationRecord
+  include PasswordManagement
   before_save { email.downcase! }
   has_secure_password
   validates :name, presence: true, length: { in: 3..50 }, format: { with: NAME_REGEX, message: 'must include letter' } 
