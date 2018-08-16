@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_08_16_221737) do
+ActiveRecord::Schema.define(version: 2018_08_16_222447) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -21,7 +21,7 @@ ActiveRecord::Schema.define(version: 2018_08_16_221737) do
     t.string "password_digest"
     t.string "address"
     t.string "place_of_birth"
-    t.string "date_of_birth"
+    t.date "date_of_birth"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "reset_password_token"
@@ -35,7 +35,7 @@ ActiveRecord::Schema.define(version: 2018_08_16_221737) do
     t.string "password_digest"
     t.string "address"
     t.string "place_of_birth"
-    t.string "date_of_birth"
+    t.date "date_of_birth"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "id_card_number"
