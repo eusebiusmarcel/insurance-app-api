@@ -6,7 +6,6 @@ Rails.application.routes.draw do
     post 'user/login' => 'user_token#create'
     post 'user/create' => 'users#create'
     put 'user/update' => 'users#update'
-    delete 'user/delete' => 'users#delete'
 
     # == Admin ==
     get 'admins' => 'admins#index'
@@ -14,6 +13,5 @@ Rails.application.routes.draw do
     post 'admin/login' => 'admin_token#create'
     post 'admin/create' => 'admins#create'
     put 'admin/update' => 'admins#update'
-    delete 'admin/delete' => 'admins#delete'
   end
 end
