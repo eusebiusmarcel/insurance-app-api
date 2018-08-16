@@ -24,7 +24,7 @@ class V1::AdminsController < ApplicationController
         if current_admin.save
             render json: { status: "Update Success", result: current_admin }, status: 202
         else
-            render json: { status: "Update Error", result: user.errors }, status: 422
+            render json: { status: "Update Error", result: current_admin.errors }, status: 422
         end
     end
 

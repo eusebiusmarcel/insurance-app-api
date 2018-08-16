@@ -24,7 +24,7 @@ class V1::UsersController < ApplicationController
         if current_user.save
             render json: { status: "Update Success", result: current_user }, status: 202
         else
-            render json: { status: "Update Error", result: user.errors }, status: 422
+            render json: { status: "Update Error", result: current_user.errors }, status: 422
         end
     end
 
