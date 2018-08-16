@@ -7,6 +7,8 @@ Rails.application.routes.draw do
     post 'user/create' => 'users#create'
     put 'user/update' => 'users#update'
     put 'user/update/password' => 'users#update_password'
+    post 'user/forgot/password' => 'users#forgot_password'
+    post 'user/reset/password/:token' => 'users#reset_password'
 
     # == Admin ==
     get 'admins' => 'admins#index'
@@ -15,5 +17,7 @@ Rails.application.routes.draw do
     post 'admin/create' => 'admins#create'
     put 'admin/update' => 'admins#update'
     put 'admin/update/password' => 'admins#update_password'
+    post 'admin/forgot/password' => 'admins#forgot_password'
+    post 'admin/reset/password/:token' => 'admins#reset_password'
   end
 end
