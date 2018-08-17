@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_08_14_080634) do
+ActiveRecord::Schema.define(version: 2018_08_17_225353) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -24,6 +24,25 @@ ActiveRecord::Schema.define(version: 2018_08_14_080634) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["email"], name: "index_admins_on_email", unique: true
+  end
+
+  create_table "polishes", force: :cascade do |t|
+    t.string "polish_number"
+    t.integer "user_id"
+    t.string "object_name"
+    t.string "object_description"
+    t.integer "insurance_type"
+    t.integer "price_per_month"
+    t.integer "payment_due_date"
+    t.integer "limit_per_year"
+    t.integer "balance"
+    t.integer "deposit"
+    t.string "document_url"
+    t.integer "status"
+    t.date "expired_at"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["polish_number"], name: "index_polishes_on_polish_number", unique: true
   end
 
   create_table "users", force: :cascade do |t|

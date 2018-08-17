@@ -1,0 +1,2 @@
+class PolishController < ApplicationController
+end
