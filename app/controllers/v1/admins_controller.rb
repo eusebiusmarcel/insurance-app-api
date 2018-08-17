@@ -17,8 +17,7 @@ class V1::AdminsController < ApplicationController
         render json: { status: 'OK', message: 'Email telah dikirim, periksa email Anda.' }, status: :ok
     end
 
-    def reset_password
-        token = params[:token]
+    def reset_password(token = params[:token])
         raise ExceptionHandler::AttributesNotComplete, 'Masukkan token' if token.blank?
         admin = Admin.find_by(reset_password_token: token)
         raise ExceptionHandler::InvalidToken, Message.link_expired if admin.blank?
