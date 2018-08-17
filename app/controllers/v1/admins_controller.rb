@@ -1,29 +1,12 @@
 class V1::AdminsController < ApplicationController
-    before_action :authenticate_admin, except: %i[create forgot_password reset_password]
-
-    def index
-        admins = Admin.all
-        render json: admins, status: :ok
-    end
-
+    before_action :authenticate_admin, except: %i[forgot_password reset_password]
     def show
-         render json: current_admin, status: :ok
-    end
-
-    def create
-        admin = Admin.new(admin_params)
-        admin.save!
-        render json: { status: "Add Admin Success", result: admin }, status: 201
-    end
-
-    def update
-        current_admin.update!(update_params)
-        render json: { status: "Update Success", result: current_admin }, status: 202
+        render json: { status: 'OK', admin: current_admin }, status: :ok
     end
 
     def update_password
         current_admin.process_update_password(params[:old_password], params[:password].to_s)
-        render json: { status: 'OK', message: 'Password telah berhasil diubah' }, status: 202
+        render json: { status: 'OK', message: 'Password telah berhasil diubah' }, status: :ok
     end
 
     def forgot_password
@@ -43,14 +26,31 @@ class V1::AdminsController < ApplicationController
         render json: { status: 'OK', message: 'Password telah berubah, silahkan login kembali' }, status: :ok
     end
 
-    private
-
-    def admin_params
-        params.permit(:name, :email, :password, :address, :place_of_birth,
-                      :date_of_birth, :gender)
+    def index_user
+        users = User.all
+        render json: { users: users }, status: :ok
     end
 
-    def update_params
-        params.permit(:email, :address)
+    def create_user
+        user = User.new(user_params)
+        user.save!
+        render json: { status: "User berhasil dibuat", result: user }, status: :created
+    end
+
+    def update_user
+        user = User.find(params[:id])
+        user.update!(update_user_params)
+        render json: { status: "User berhasil diupdate", result: user }, status: :created
+    end
+
+    private
+
+    def user_params
+        params.permit(:name, :email, :password, :id_card_number, :gender,
+                      :address, :phone_number, :place_of_birth, :date_of_birth)
+    end
+
+    def update_user_params
+        params.permit(:email, :address, :phone_number)
     end
 end
