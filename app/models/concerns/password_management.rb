@@ -9,11 +9,16 @@ module PasswordManagement
   def process_forgot_password
     raise ExceptionHandler::TellingLie, 'Email telah dikirim, periksa email Anda.' unless self.present?
     generate_reset_password_token!
+    UserMailer.forgot_password(self).deliver
   end
 
   def process_reset_password(password)
     raise ExceptionHandler::InvalidToken, Message.link_expired unless present_and_has_valid_token
     reset_password!(password)
+  end
+
+  def generate_token
+    SecureRandom.urlsafe_base64
   end
 
   private
@@ -34,10 +39,6 @@ module PasswordManagement
     self.reset_password_token = generate_token
     self.reset_password_token_sent_at = Time.now.utc
     save!
-  end
-
-  def generate_token
-    SecureRandom.urlsafe_base64
   end
 
   def present_and_has_valid_token
