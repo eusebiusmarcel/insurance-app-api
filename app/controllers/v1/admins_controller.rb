@@ -32,7 +32,9 @@ class V1::AdminsController < ApplicationController
 
     def create_user
         user = User.new(user_params)
+        user.password = user.generate_token
         user.save!
+        UserMailer.selamat_datang(user).deliver
         render json: { status: "User berhasil dibuat", result: user }, status: :created
     end
 
@@ -45,7 +47,7 @@ class V1::AdminsController < ApplicationController
     private
 
     def user_params
-        params.permit(:name, :email, :password, :id_card_number, :gender,
+        params.permit(:name, :email, :id_card_number, :gender,
                       :address, :phone_number, :place_of_birth, :date_of_birth)
     end
 
