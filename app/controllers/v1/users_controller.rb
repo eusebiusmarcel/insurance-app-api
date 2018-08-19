@@ -2,7 +2,7 @@ class V1::UsersController < ApplicationController
     before_action :authenticate_user, except: %i[forgot_password reset_password]
     def show
         render json: { status: 'OK', user: current_user.as_json(except: 
-        :password_digest, methods: :date_of_birth_display) }, status: :ok
+        :password_digest) }, status: :ok
     end
 
     def update_password
