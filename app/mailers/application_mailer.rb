@@ -1,4 +1,4 @@
 class ApplicationMailer < ActionMailer::Base
-  default from: 'quind.data.insurance@gmail.com'
+  default from: 'Quind Data Insurance'
   layout 'mailer'
 end

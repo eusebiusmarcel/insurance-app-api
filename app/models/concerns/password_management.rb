@@ -8,8 +8,8 @@ module PasswordManagement
 
   def process_forgot_password
     generate_reset_password_token!
-    UserMailer.forgot_password(self).deliver if self.class == User
-    AdminMailer.forgot_password(self).deliver if self.class == Admin
+    UserMailer.with(user: self).forgot_password.deliver if self.class == User
+    AdminMailer.with(admin: self).forgot_password.deliver if self.class == Admin
   end
 
   def process_reset_password(password)

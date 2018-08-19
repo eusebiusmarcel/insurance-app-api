@@ -37,7 +37,7 @@ class V1::AdminsController < ApplicationController
         user = User.new(user_params)
         user.password = user.generate_token
         user.save!
-        UserMailer.selamat_datang(user).deliver
+        UserMailer.with(user: user).welcome.deliver
         render json: { status: "User berhasil dibuat", result: user.as_json(except:
         %i[password_digest reset_password_token reset_password_token_sent_at]) },
                status: :created

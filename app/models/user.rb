@@ -14,4 +14,7 @@ class User < ApplicationRecord
   enum gender: { perempuan: 0, laki_laki: 1 }
   validates :phone_number, presence: true, format: { with: PHONE_REGEX }
   validates_presence_of :address, :place_of_birth, :date_of_birth
+  def date_of_birth_display
+    self.date_of_birth = self[:date_of_birth].strftime('%d-%m-%Y')
+  end
 end
