@@ -18,7 +18,7 @@ module PasswordManagement
   end
 
   def generate_token
-    SecureRandom.urlsafe_base64
+    SecureRandom.hex(3)
   end
 
   private
