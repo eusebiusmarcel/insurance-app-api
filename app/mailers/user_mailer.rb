@@ -9,6 +9,10 @@ class UserMailer < ApplicationMailer
     mail to: @email_with_name, subject: "Hi #{@user.name}, this is your reset password link"
   end
 
+  def change_email
+    mail to: @email_with_name, subject: "Hi #{@user.name}, your email change succeeds!"
+  end
+
   private
 
   def set_email

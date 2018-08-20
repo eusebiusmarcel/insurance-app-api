@@ -27,7 +27,7 @@ class V1::AdminsController < ApplicationController
     end
 
     def index_user
-        users = User.all
+        users = User.all.order(:id)
         render json: { users: users.as_json(except:
         %i[password_digest reset_password_token reset_password_token_sent_at]) },
                status: :ok
@@ -45,7 +45,13 @@ class V1::AdminsController < ApplicationController
 
     def update_user
         user = User.find(params[:id])
+        old_email = user.email
         user.update!(update_user_params)
+        unless params[:email].blank? || user.email == old_email
+            user.password = user.generate_token
+            user.save!
+            UserMailer.with(user: user).change_email.deliver
+        end
         render json: { status: "User berhasil diupdate", result: user.as_json(except:
             %i[password_digest reset_password_token reset_password_token_sent_at]) },
                status: :ok
