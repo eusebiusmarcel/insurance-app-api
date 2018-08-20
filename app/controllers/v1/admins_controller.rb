@@ -27,7 +27,7 @@ class V1::AdminsController < ApplicationController
     end
 
     def index_user
-        users = User.all
+        users = User.all.order(:id)
         render json: { users: users.as_json(except:
         %i[password_digest reset_password_token reset_password_token_sent_at]) },
                status: :ok
