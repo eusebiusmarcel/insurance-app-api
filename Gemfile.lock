@@ -67,11 +67,6 @@ GEM
     i18n (1.1.0)
       concurrent-ruby (~> 1.0)
     json (2.1.0)
-    jwt (1.5.6)
-    knock (2.1.1)
-      bcrypt (~> 3.1)
-      jwt (~> 1.5)
-      rails (>= 4.2)
     launchy (2.4.3)
       addressable (~> 2.3)
     listen (3.1.5)
@@ -178,7 +173,6 @@ DEPENDENCIES
   byebug
   figaro
   hirb
-  knock
   listen (>= 3.0.5, < 3.2)
   pg (>= 0.18, < 2.0)
   pry

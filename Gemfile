@@ -48,7 +48,6 @@ end
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 
 gem 'figaro'
-gem 'knock'
 gem 'rails_best_practices'
 gem 'sandi_meter'
 gem 'brakeman'
