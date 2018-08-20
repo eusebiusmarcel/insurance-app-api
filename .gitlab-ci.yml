@@ -2,7 +2,7 @@ image: "ruby:2.5.1"
 
 variables:
   APP_NAME: quind-api
-  HEROKU_PRODUCTION_KEY: ENV["API_KEY"]
+  HEROKU_PRODUCTION_KEY: a289ce34-cc4e-4740-bf2f-7267c348ca3e
 
 deploy_to_production:
   type: deploy
