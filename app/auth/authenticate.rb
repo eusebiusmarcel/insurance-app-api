@@ -1,6 +1,6 @@
 class Authenticate
   def initialize(email, password)
-    @email = email
+    @email = email.downcase
     @password = password
   end
 
@@ -17,16 +17,21 @@ class Authenticate
   attr_reader :email, :password
 
   def user
-    validate(User)
+    search(User)
   end
 
   def admin
-    validate(Admin)
+    search(Admin)
   end
 
-  def validate(account)
-    account = account.find_by(email: email)
-    return account if account && account.authenticate(password)
-    raise(ExceptionHandler::AuthenticationError, Message.invalid_credentials)
+  def search(account)
+    @account = account.find_by(email: email)
+    valid_credentials?
+  end
+
+  def valid_credentials?
+    raise(ExceptionHandler::AuthenticationError, Message.invalid_email) unless @account
+    raise(ExceptionHandler::AuthenticationError, Message.invalid_password) unless @account.authenticate(password)
+    @account
   end
 end

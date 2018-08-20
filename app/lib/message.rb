@@ -15,8 +15,12 @@ class Message
     'Password telah diubah, silahkan login kembali'
   end
 
-  def self.invalid_credentials
-    'Email atau password salah.'
+  def self.invalid_email
+    'Email salah.'
+  end
+
+  def self.invalid_password
+    'Password salah.'
   end
 
   def self.invalid_token
