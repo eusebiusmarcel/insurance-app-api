@@ -2,14 +2,14 @@ Rails.application.routes.draw do
   namespace :v1 do
     # == User ==
     get 'user' => 'users#show'
-    post 'user/login' => 'user_token#create'
+    post 'user/login' => 'authentications#authenticate_user'
     put 'user/update/password' => 'users#update_password'
     post 'user/forgot/password' => 'users#forgot_password'
     post 'user/reset/password/:token' => 'users#reset_password'
 
     # == Admin ==
     get 'admin' => 'admins#show'
-    post 'admin/login' => 'admin_token#create'
+    post 'admin/login' => 'authentications#authenticate_admin'
     put 'admin/update/password' => 'admins#update_password'
     post 'admin/forgot/password' => 'admins#forgot_password'
     post 'admin/reset/password/:token' => 'admins#reset_password'

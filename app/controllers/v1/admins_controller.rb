@@ -1,5 +1,6 @@
 class V1::AdminsController < ApplicationController
     before_action :authenticate_admin, except: %i[forgot_password reset_password]
+    attr_reader :current_admin
     def show
         render json: { status: 'OK', admin: current_admin.as_json(except:
         :password_digest) }, status: :ok
@@ -45,19 +46,19 @@ class V1::AdminsController < ApplicationController
 
     def update_user
         user = User.find(params[:id])
-        old_email = user.email
+        @old_email = user.email
         user.update!(update_user_params)
-        unless params[:email].blank? || user.email == old_email
-            user.password = user.generate_token
-            user.save!
-            UserMailer.with(user: user).change_email.deliver
-        end
+        send_new_password_to_new_email(user) unless params[:email].blank?
         render json: { status: "User berhasil diupdate", result: user.as_json(except:
             %i[password_digest reset_password_token reset_password_token_sent_at]) },
                status: :ok
     end
 
     private
+
+    def authenticate_admin
+        @current_admin = AuthorizeApiRequest.new(request.headers).call_admin[:admin]
+    end
 
     def user_params
         params.permit(:name, :email, :id_card_number, :gender,
@@ -66,5 +67,12 @@ class V1::AdminsController < ApplicationController
 
     def update_user_params
         params.permit(:email, :address, :phone_number)
+    end
+
+    def send_new_password_to_new_email(user)
+        return if user.email == @old_email
+        user.password = user.generate_token
+        user.save!
+        UserMailer.with(user: user).change_email.deliver
     end
 end
