@@ -10,6 +10,8 @@ deploy_to_production:
   environment: production
   script:
   - gem install dpl
-  - dpl --provider=heroku --app=$APP_NAME --api-key=$HEROKU_PRODUCTION_KEY
+  - dpl --provider=heroku --app=$APP_NAME --api-key=$HEROKU_API_KEY
+  - curl https://cli-assets.heroku.com/install.sh | sh
+  - heroku run rake db:migrate --exit-code --app $APP_NAME
   only:
   - master
