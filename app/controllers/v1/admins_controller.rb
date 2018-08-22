@@ -1,6 +1,6 @@
 class V1::AdminsController < ApplicationController
     before_action :authenticate_admin, except: %i[forgot_password reset_password]
-    attr_reader :current_admin, :user
+    attr_reader :current_admin
     def show
         render json: { status: 'OK', admin: current_admin.as_json(except:
         :password_digest) }, status: :ok
@@ -38,8 +38,8 @@ class V1::AdminsController < ApplicationController
         user = User.new(user_params)
         user.password = user.generate_token
         user.save!
-        UserMailer.with(user: @user).welcome.deliver
-        render json: { status: "User berhasil dibuat", result: @user.as_json(except:
+        UserMailer.with(user: user).welcome.deliver
+        render json: { status: "User berhasil dibuat", result: user.as_json(except:
         %i[password_digest reset_password_token reset_password_token_sent_at]) },
                status: :created
     end
