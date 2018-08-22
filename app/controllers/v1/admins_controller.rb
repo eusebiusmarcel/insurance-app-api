@@ -44,6 +44,12 @@ class V1::AdminsController < ApplicationController
                status: :created
     end
 
+    def create_user_by_csv
+        User.import!(params[:file])
+        render json: { created_users: User.created_users.as_json(except: %i[password_digest reset_password_token reset_password_token_sent_at]),
+            failed_to_create_users: User.failed_to_create_users.as_json(except: %i[password_digest reset_password_token reset_password_token_sent_at])}, status: :ok
+    end
+
     def update_user
         user = User.find(params[:id])
         @old_email = user.email
