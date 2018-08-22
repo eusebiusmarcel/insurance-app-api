@@ -20,17 +20,26 @@ class User < ApplicationRecord
   validates_presence_of :address, :place_of_birth, :date_of_birth
 
   def self.import!(file)
-    @created_users, @failed_to_create_users = Array.new(2) { [] }
+    @@created_users, @@failed_to_create_users = Array.new(2) { [] }
     CSV.foreach(file.path, headers: true) do |row|
       user = User.new(row.to_hash)
+      user.email.downcase!
       user.password = user.generate_token
       if user.save
         UserMailer.with(user: user).welcome.deliver
-        @created_users.push(user)
+        @@created_users.push(user)
       else
-        @failed_to_create_users.push(failed_users: user.email, error_messages: user.errors)
+        @@failed_to_create_users.push(user_email: user.email, errors: user.errors)
         next
       end
     end
+  end
+
+  def self.created_users
+    @@created_users
+  end
+
+  def self.failed_to_create_users
+    @@failed_to_create_users
   end
 end
