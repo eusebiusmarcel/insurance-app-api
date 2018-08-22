@@ -2,7 +2,6 @@ image: "ruby:2.5.1"
 
 variables:
   APP_NAME: quind-api
-  # HEROKU_API_KEY saved as secret variable in gitlab repo
 
 deploy_to_production:
   type: deploy
