@@ -14,6 +14,7 @@ Rails.application.routes.draw do
     post 'admin/forgot/password' => 'admins#forgot_password'
     post 'admin/reset/password/:token' => 'admins#reset_password'
     post 'admin/user/create' => 'admins#create_user'
+    post 'admin/user/create/csv' => 'admins#create_user_by_csv'
     get 'admin/users' => 'admins#index_user'
     put 'admin/user/update/:id' => 'admins#update_user'
   end
