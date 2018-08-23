@@ -6,6 +6,7 @@ class V1::UsersController < ApplicationController
     end
 
     def upload_avatar
+        current_user.remove_avatar! unless current_user.avatar.blank?
         current_user.update!(params.permit(:avatar))
         render json: { status: 'Avatar berhasil diupload, silahkan lihat profile anda' }, 
                status: :ok
