@@ -11,6 +11,12 @@ class V1::UsersController < ApplicationController
                status: :ok
     end
 
+    def delete_avatar
+        current_user.remove_avatar!
+        current_user.save!
+        render json: { status: 'Avatar berhasil dihapus' }, status: :ok
+    end
+
     def update_password
         current_user.process_update_password(params[:old_password], params[:password].to_s)
         render json: { status: 'OK', message: 'Password telah berhasil diubah' }, status: :ok

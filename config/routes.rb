@@ -27,5 +27,7 @@ Rails.application.routes.draw do
     # Avatar Collections
     put 'user/avatar/upload' => 'users#upload_avatar'
     put 'admin/avatar/upload' => 'admins#upload_avatar'
+    delete 'user/avatar/delete' => 'users#delete_avatar'
+    delete 'admin/avatar/delete' => 'admins#delete_avatar'
   end
 end
