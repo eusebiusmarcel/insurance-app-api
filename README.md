@@ -1,5 +1,6 @@
-APIs
-Admins Collection
+# List APIs
+
+## Admin Collection
 - Admin Login
 - Show Admin Profile
 - Admin Update Password
@@ -10,9 +11,14 @@ Admins Collection
 - Admin Show All Users' Profile
 - Admin Update User's Account
 
-Users Collection
+## User Collection
 - User Login
 - Show User's Profile
 - User Update Password
 - User Forgot Password
 - User Reset Password
+
+## Policy Collections
+- Admin Create Policy
+- Admin Show Policies
+- User Show Owned Policies

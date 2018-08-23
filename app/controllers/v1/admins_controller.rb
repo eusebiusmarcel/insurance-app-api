@@ -1,9 +1,20 @@
 class V1::AdminsController < ApplicationController
     before_action :authenticate_admin, except: %i[forgot_password reset_password]
-    attr_reader :current_admin
     def show
         render json: { status: 'OK', admin: current_admin.as_json(except:
         :password_digest) }, status: :ok
+    end
+
+    def upload_avatar
+        current_admin.update!(params.permit(:avatar))
+        render json: { status: 'Avatar berhasil diupload, silahkan lihat profile anda' }, 
+               status: :ok
+    end
+
+    def delete_avatar
+        current_admin.remove_avatar!
+        current_admin.save!
+        render json: { status: 'Avatar berhasil dihapus' }, status: :ok
     end
 
     def update_password
@@ -13,7 +24,7 @@ class V1::AdminsController < ApplicationController
 
     def forgot_password
         raise ExceptionHandler::AttributesNotComplete, 'Masukkan email' unless params[:email].present?
-        admin = Admin.find_by(email: params[:email])
+        admin = Admin.find_by(email: params[:email].downcase)
         raise ExceptionHandler::TellingLie, Message.email_sent if admin.blank?
         admin.process_forgot_password
         render json: { status: 'OK', message: Message.email_sent }, status: :ok
@@ -61,10 +72,6 @@ class V1::AdminsController < ApplicationController
     end
 
     private
-
-    def authenticate_admin
-        @current_admin = AuthorizeApiRequest.new(request.headers).call_admin[:admin]
-    end
 
     def user_params
         params.permit(:name, :email, :id_card_number, :gender,
