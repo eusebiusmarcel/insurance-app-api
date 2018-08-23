@@ -1,0 +1,9 @@
+development:
+  cloud_name: "quind-cloud"
+  api_key: "919497438989579"
+  api_secret: "Ux5LLFa4vaS22vGmDJOroonwWRg"
+
+production:
+  cloud_name: "quind-cloud"
+  api_key: "919497438989579"
+  api_secret: "Ux5LLFa4vaS22vGmDJOroonwWRg"

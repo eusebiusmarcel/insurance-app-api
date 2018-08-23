@@ -5,6 +5,12 @@ class V1::UsersController < ApplicationController
         :password_digest) }, status: :ok
     end
 
+    def upload_avatar
+        current_user.update!(params.permit(:avatar))
+        render json: { status: 'Avatar berhasil diupload, silahkan lihat profile anda' }, 
+               status: :ok
+    end
+
     def update_password
         current_user.process_update_password(params[:old_password], params[:password].to_s)
         render json: { status: 'OK', message: 'Password telah berhasil diubah' }, status: :ok

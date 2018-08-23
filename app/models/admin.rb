@@ -1,5 +1,7 @@
 class Admin < ApplicationRecord
   include PasswordManagement
+  mount_uploader :avatar, AvatarUploader
+
   before_save { email.downcase! }
   has_secure_password
   validates :name, presence: true, length: { in: 3..50 }
