@@ -1,7 +1,8 @@
 class User < ApplicationRecord
   require 'csv'
   include PasswordManagement
-
+  mount_uploader :avatar, AvatarUploader
+  
   scope :recently_created, -> { where("created_at > ?", Time.now - 10.minutes) }
 
   before_save { email.downcase! }

@@ -17,11 +17,15 @@ Rails.application.routes.draw do
     post 'admin/user/create/csv' => 'admins#create_user_by_csv'
     get 'admin/users' => 'admins#index_user'
     put 'admin/user/update/:id' => 'admins#update_user'
-    
+
     # Policy Collections
     get 'admin/policies' => 'policies#index'
     post 'admin/policy/create' => 'policies#create'
     post 'admin/policy/create/csv' => 'policies#create_by_csv'
     get 'user/policies' => 'policies#show_user_policies'
+
+    # Avatar Collections
+    put 'user/avatar/upload' => 'users#upload_avatar'
+    put 'admin/avatar/upload' => 'admins#upload_avatar'
   end
 end
