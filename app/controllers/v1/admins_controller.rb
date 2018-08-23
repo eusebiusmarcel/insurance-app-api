@@ -1,6 +1,5 @@
 class V1::AdminsController < ApplicationController
     before_action :authenticate_admin, except: %i[forgot_password reset_password]
-    attr_reader :current_admin
     def show
         render json: { status: 'OK', admin: current_admin.as_json(except:
         :password_digest) }, status: :ok
@@ -61,10 +60,6 @@ class V1::AdminsController < ApplicationController
     end
 
     private
-
-    def authenticate_admin
-        @current_admin = AuthorizeApiRequest.new(request.headers).call_admin[:admin]
-    end
 
     def user_params
         params.permit(:name, :email, :id_card_number, :gender,

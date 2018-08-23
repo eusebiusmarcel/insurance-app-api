@@ -1,5 +1,5 @@
 class UserMailer < ApplicationMailer
-  before_action :set_email
+  before_action :set_attributes
   def welcome
     mail to: @email_with_name, subject: "Hi #{@user.name}, welcome to Quind!"
   end
@@ -13,10 +13,15 @@ class UserMailer < ApplicationMailer
     mail to: @email_with_name, subject: "Hi #{@user.name}, your email change succeeds!"
   end
 
+  def policy_registered
+    mail to: @email_with_name, subject: "Hi #{@user.name}, your policy has been registered!"
+  end
+
   private
 
-  def set_email
+  def set_attributes
     @user = params[:user]
+    @policy = params[:policy]
     @email_with_name = %("#{@user.name}" <#{@user.email}>)
   end
 end
