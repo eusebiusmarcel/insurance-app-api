@@ -13,7 +13,7 @@ class V1::AdminsController < ApplicationController
 
     def forgot_password
         raise ExceptionHandler::AttributesNotComplete, 'Masukkan email' unless params[:email].present?
-        admin = Admin.find_by(email: params[:email])
+        admin = Admin.find_by(email: params[:email].downcase)
         raise ExceptionHandler::TellingLie, Message.email_sent if admin.blank?
         admin.process_forgot_password
         render json: { status: 'OK', message: Message.email_sent }, status: :ok
