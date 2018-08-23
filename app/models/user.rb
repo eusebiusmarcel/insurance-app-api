@@ -6,7 +6,7 @@ class User < ApplicationRecord
 
   before_save { email.downcase! }
   has_secure_password
-  has_many :polishes
+  has_many :policies
   validates :name, presence: true, length: { in: 3..50 }
   validates :email, presence: true, format: { with: EMAIL_REGEX }, 
                     uniqueness: {case_sensitive: false }
@@ -23,7 +23,7 @@ class User < ApplicationRecord
     @@created_users, @@failed_to_create_users = Array.new(2) { [] }
     CSV.foreach(file.path, headers: true) do |row|
       user = User.new(row.to_hash)
-      user.email.downcase!
+      user.email.downcase! unless user.email.blank?
       user.password = user.generate_token
       if user.save
         UserMailer.with(user: user).welcome.deliver
