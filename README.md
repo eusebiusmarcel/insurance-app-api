@@ -23,7 +23,7 @@
 - Admin Show Policies
 - User Show Owned Policies
 
-## Avatar Collections
+## Avatar Collection
 - User Upload Avatar
 - Admin Upload Avatar
 - User Delete Avatar
