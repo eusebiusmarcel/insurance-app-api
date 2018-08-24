@@ -21,6 +21,7 @@
 ## Policy Collection
 - Admin Create Policy
 - Admin Show Policies
+- Admin Show Policies by One User
 - User Show Owned Policies
 
 ## Avatar Collection
