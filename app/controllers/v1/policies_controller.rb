@@ -1,8 +1,15 @@
 class V1::PoliciesController < ApplicationController
-  before_action :authenticate_admin, only: %i[index create create_by_csv]
+  before_action :authenticate_admin, 
+                only: %i[index show_policies_of_one_user create create_by_csv]
   before_action :authenticate_user, only: %i[show_user_policies]
   def index
     policies = Policy.all.order(:id)
+    render json: { status: 'OK', policies: policies }, status: :ok
+  end
+
+  def show_policies_of_one_user
+    user = User.find(params[:id])
+    policies = user.policies.all.order(:id)
     render json: { status: 'OK', policies: policies }, status: :ok
   end
 
