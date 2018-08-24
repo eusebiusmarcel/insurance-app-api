@@ -8,17 +8,24 @@
 - Admin Reset Password
 - Admin Create User
 - Admin Create Users by Uploading CSV File
-- Admin Show All Users' Profile
-- Admin Update User's Account
+- Admin Show Users
+- Admin Update User
 
 ## User Collection
 - User Login
-- Show User's Profile
+- Show User Profile
 - User Update Password
 - User Forgot Password
 - User Reset Password
 
-## Policy Collections
+## Policy Collection
 - Admin Create Policy
 - Admin Show Policies
+- Admin Show Policies by One User
 - User Show Owned Policies
+
+## Avatar Collection
+- User Upload Avatar
+- Admin Upload Avatar
+- User Delete Avatar
+- Admin Delete Avatar

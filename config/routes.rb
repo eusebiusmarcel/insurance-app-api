@@ -20,6 +20,7 @@ Rails.application.routes.draw do
 
     # Policy Collections
     get 'admin/policies' => 'policies#index'
+    get 'admin/policies/user/:id' => 'policies#show_policies_of_one_user'
     post 'admin/policy/create' => 'policies#create'
     post 'admin/policy/create/csv' => 'policies#create_by_csv'
     get 'user/policies' => 'policies#show_user_policies'
