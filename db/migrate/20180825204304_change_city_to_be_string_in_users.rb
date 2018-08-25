@@ -1,0 +1,5 @@
+class ChangeCityToBeStringInUsers < ActiveRecord::Migration[5.2]
+  def change
+      change_column :users, :city, :string
+  end
+end
