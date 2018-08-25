@@ -20,8 +20,8 @@ class User < ApplicationRecord
   validates :phone_number, presence: true, format: { with: PHONE_REGEX }
   validates_presence_of :address, :place_of_birth, :date_of_birth
   validates :city, inclusion: 
-  { in: %w[Jakarta Bandung Yogyakarta Surabaya Bali], message: 'Jakarta, Bandung, 
-  Yogyakarta, Surabaya, atau Bali?' }
+  { in: %w[Jakarta Bandung Yogyakarta Surabaya Bali], 
+    message: 'Jakarta, Bandung, Yogyakarta, Surabaya, atau Bali?' }
   enum city: { Jakarta: 'Jakarta', Bandung: 'Bandung', Yogyakarta: 'Yogyakarta', 
                Surabaya: 'Surabaya', Bali: 'Bali' }
 
