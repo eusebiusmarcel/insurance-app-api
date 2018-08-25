@@ -19,6 +19,11 @@ class User < ApplicationRecord
   enum gender: { P: 0, L: 1 }
   validates :phone_number, presence: true, format: { with: PHONE_REGEX }
   validates_presence_of :address, :place_of_birth, :date_of_birth
+  validates :city, inclusion: 
+  { in: %w[Jakarta Bandung Yogyakarta Surabaya Bali], 
+    message: 'Jakarta, Bandung, Yogyakarta, Surabaya, atau Bali?' }
+  enum city: { Jakarta: 'Jakarta', Bandung: 'Bandung', Yogyakarta: 'Yogyakarta', 
+               Surabaya: 'Surabaya', Bali: 'Bali' }
 
   def self.import!(file)
     @@created_users, @@failed_to_create_users = Array.new(2) { [] }
