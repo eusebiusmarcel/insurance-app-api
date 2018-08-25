@@ -21,7 +21,7 @@
 ## Policy Collection
 - Admin Create Policy
 - Admin Show Policies
-- Admin Show Policies by One User
+- Admin Show Policies of One User
 - User Show Owned Policies
 
 ## Avatar Collection
@@ -29,3 +29,10 @@
 - Admin Upload Avatar
 - User Delete Avatar
 - Admin Delete Avatar
+
+## No Login Collection
+- Show All Users
+- Show All Policies
+- Show Policies of One User
+- Show User by ID
+- Show Policy by ID
