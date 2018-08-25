@@ -30,5 +30,12 @@ Rails.application.routes.draw do
     put 'admin/avatar/upload' => 'admins#upload_avatar'
     delete 'user/avatar/delete' => 'users#delete_avatar'
     delete 'admin/avatar/delete' => 'admins#delete_avatar'
+
+    # No Login Collections
+    get 'users' => 'no_logins#index_user'
+    get 'policies' => 'no_logins#index_policy'
+    get 'policies/user/:id' => 'no_logins#show_policies_of_one_user'
+    get 'user/:id' => 'no_logins#show_user'
+    get 'policy/:id' => 'no_logins#show_policy'
   end
 end
