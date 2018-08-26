@@ -41,7 +41,8 @@ Rails.application.routes.draw do
     # Guest Collections
     post  'guest/create' => 'guests#create_guest'
     get   'guests' => 'guests#index_guest'
-    get  'guest/:id' => 'guests#show_guest'
+    get   'guest/:id' => 'guests#show_guest'
+    get   'guest/filter/:insurance_type' =>'guests#filter_guest'
 
   end
 end

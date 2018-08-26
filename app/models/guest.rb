@@ -1,5 +1,6 @@
 class Guest < ApplicationRecord
-
+    scope :guests_by_product, -> (insurance_type) { where insurance_type: insurance_type }
+    
     validates :name, presence: true, length: { in: 3..50 }
     validates :email, presence: true, format: { with: EMAIL_REGEX }     
     validates :phone_number, presence: true, format: { with: PHONE_REGEX }

@@ -10,6 +10,12 @@ class V1::GuestsController < ApplicationController
         render json:{ guest: @guest }, status: :ok
     end
 
+    def filter_guest
+        guest = Guest.all
+        guest = guest.guests_by_product(params[:insurance_type]) if params[:insurance_type].present?
+        render json: { status: "berhasil difilter", guest: guest}, status: :ok
+    end
+
     private
     def guest_params
         params.require(:guest).permit(:name, :email, :phone_number, :insurance_type, :city)
