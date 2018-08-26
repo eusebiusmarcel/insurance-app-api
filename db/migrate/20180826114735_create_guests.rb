@@ -3,7 +3,7 @@ class CreateGuests < ActiveRecord::Migration[5.2]
     create_table :guests do |t|
       t.string :name
       t.string :email
-      t.integer :phone_number
+      t.string :phone_number
       t.integer :insurance_type
       t.string :city
 

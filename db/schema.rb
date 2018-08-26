@@ -30,7 +30,7 @@ ActiveRecord::Schema.define(version: 2018_08_26_114735) do
   create_table "guests", force: :cascade do |t|
     t.string "name"
     t.string "email"
-    t.integer "phone_number"
+    t.string "phone_number"
     t.integer "insurance_type"
     t.string "city"
     t.datetime "created_at", null: false
