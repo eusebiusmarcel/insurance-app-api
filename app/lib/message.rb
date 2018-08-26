@@ -30,4 +30,8 @@ class Message
   def self.missing_token
     'Missing token'
   end
+
+  def self.user_email_unregistered
+    'Email user tidak terdaftar'
+  end
 end
