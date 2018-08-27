@@ -8,9 +8,9 @@ class Guest < ApplicationRecord
                       uniqueness: { case_sensitive: false }
     validates :phone_number, presence: true, format: { with: PHONE_REGEX }
     validates :insurance_type, inclusion: {
-      in: ['Cyber Privacy Risk', 'Mobile & Tablet', 'Social_Media_Account'],
-      message: 'Cyber Privacy Risk (0), Mobile & Tablet (1), atau Social_Media_Account (2)' }
-    enum insurance_type: { 'Cyber Privacy Risk': 0, 'Mobile & Tablet': 1, 'Social_Media_Account': 2 }
+      in: ['Cyber Privacy Risk', 'Mobile & Tablet', 'Social Media Account'],
+      message: 'Cyber Privacy Risk (0), Mobile & Tablet (1), atau Social Media Account (2)' }
+    enum insurance_type: { 'Cyber Privacy Risk': 0, 'Mobile & Tablet': 1, 'Social Media Account': 2 }
     validates :city, inclusion: 
     { in: %w[Jakarta Bandung Yogyakarta Surabaya Bali],
       message: 'Jakarta, Bandung, Yogyakarta, Surabaya, atau Bali?' }
