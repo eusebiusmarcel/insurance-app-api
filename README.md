@@ -38,7 +38,6 @@
 - Show Policy by ID
 
 ## Guest Collection
-- Create guest
-- show guest
-- filter guest by insurance type
-- search guest by name/email
+- Create Guest
+- Show Guest
+- Index Guest
