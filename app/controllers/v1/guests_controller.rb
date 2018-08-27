@@ -13,14 +13,9 @@ class V1::GuestsController < ApplicationController
     def index_guest
         guests = Guest.all.order(:id)
         guests = guests.guests_by_product(params[:insurance_type]) if params[:insurance_type].present?
+        guests = guests.search_name(params[:name]) if params[:name].present?
+        guests = guests.search_email(params[:email]) if params[:email].present?
         render json: { status: "OK", guest: guests }, status: :ok
-    end
-
-    def search_guest
-        guest = Guest.all.order(:id)
-        guest = guest.search_name(params[:name]) if params[:name].present?
-        guest = guest.search_email(params[:email]) if params[:email].present?
-        render json: { status: "Pencarian berhasil", guest: guest}, status: :ok
     end
 
     private
