@@ -5,8 +5,8 @@ class Policy < ApplicationRecord
   validates :payment_due_date, presence: true, inclusion: { 
     in: 1..28, message: 'pilih tanggal 1 sampai 28' }
   validates :insurance_type, inclusion: {
-    in: %w[cyber_privacy_risk mobile_tablet social_media_account],
-    message: 'cyber_privacy_risk (0), mobile_tablet (1), atau social_media_account (2)' }
-  enum insurance_type: { cyber_privacy_risk: 0, mobile_tablet: 1, social_media_account: 2 }
+    in: ['Cyber Privacy Risk', 'Mobile & Tablet', 'Social Media Account'],
+    message: 'Cyber Privacy Risk (0), Mobile & Tablet (1), atau Social Media Account (2)' }
+  enum insurance_type: { 'Cyber Privacy Risk': 0, 'Mobile & Tablet': 1, 'Social Media Account': 2 }
   enum status: { active: 0, inactive: 1 }
 end

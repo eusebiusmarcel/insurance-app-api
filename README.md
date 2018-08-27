@@ -36,3 +36,8 @@
 - Show Policies of One User
 - Show User by ID
 - Show Policy by ID
+
+## Guest Collection
+- Create Guest
+- Show Guest
+- Index Guest
