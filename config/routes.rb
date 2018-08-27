@@ -37,5 +37,14 @@ Rails.application.routes.draw do
     get 'policies/user/:id' => 'no_logins#show_policies_of_one_user'
     get 'user/:id' => 'no_logins#show_user'
     get 'policy/:id' => 'no_logins#show_policy'
+
+    # Guest Collections
+    post  'guest/create' => 'guests#create_guest'
+    get   'guests' => 'guests#index_guest'
+    get   'guest/:id' => 'guests#show_guest'
+    get   'guest/filter/:insurance_type' =>'guests#filter_guest'
+    get   'guests/:email' => 'guests#search_guest'
+    get   'guests/:name' => 'guests#search_guest'
+
   end
 end
