@@ -11,29 +11,30 @@ class V1::GuestsController < ApplicationController
     end
 
     def index_guest
-        guests = Guest.all
+        guests = Guest.all.order(:id)
         render json: { status: "OK", guest: guests }, status: :ok
     end
 
     def filter_guest
-        guest = Guest.all
+        guest = Guest.all.order(:id)
         guest = guest.guests_by_product(params[:insurance_type]) if params[:insurance_type].present?
-        render json: { status: "berhasil difilter", guest: guest}, status: :ok
+        render json: { status: "Guest berhasil difilter", guest: guest}, status: :ok
     end
 
     def search_guest
-        guest = Guest.all
+        guest = Guest.all.order(:id)
         guest = guest.search_name(params[:name]) if params[:name].present?
         guest = guest.search_email(params[:email]) if params[:email].present?
-        render json: { status: "pencarian berhasil", guest: guest}, status: :ok
+        render json: { status: "Pencarian berhasil", guest: guest}, status: :ok
     end
 
     private
+
     def guest_params
         params.require(:guest).permit(:name, :email, :phone_number, :insurance_type, :city)
-    end    
+    end
 
     def set_guest
         @guest = Guest.find(params[:id])
     end
-end    
+end
