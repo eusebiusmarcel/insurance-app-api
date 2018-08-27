@@ -42,7 +42,6 @@ Rails.application.routes.draw do
     post  'guest/create' => 'guests#create_guest'
     get   'guests' => 'guests#index_guest'
     get   'guest/:id' => 'guests#show_guest'
-    get   'guest/filter/:insurance_type' =>'guests#filter_guest'
     get   'guests/:email' => 'guests#search_guest'
     get   'guests/:name' => 'guests#search_guest'
 

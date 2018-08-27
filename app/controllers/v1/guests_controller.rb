@@ -12,13 +12,8 @@ class V1::GuestsController < ApplicationController
 
     def index_guest
         guests = Guest.all.order(:id)
+        guests = guests.guests_by_product(params[:insurance_type]) if params[:insurance_type].present?
         render json: { status: "OK", guest: guests }, status: :ok
-    end
-
-    def filter_guest
-        guest = Guest.all.order(:id)
-        guest = guest.guests_by_product(params[:insurance_type]) if params[:insurance_type].present?
-        render json: { status: "Guest berhasil difilter", guest: guest}, status: :ok
     end
 
     def search_guest
