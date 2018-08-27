@@ -12,7 +12,7 @@ class V1::GuestsController < ApplicationController
 
     def index_guest
         guests = Guest.all
-        render json: { status: "jos", guest: guests }, status: :ok
+        render json: { status: "OK", guest: guests }, status: :ok
     end
 
     def filter_guest

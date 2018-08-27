@@ -19,11 +19,11 @@ Rails.application.routes.draw do
     put 'admin/user/update/:id' => 'admins#update_user'
 
     # Policy Collections
-    get 'admin/policies' => 'policies#index'
-    get 'admin/policies/user/:id' => 'policies#show_policies_of_one_user'
-    post 'admin/policy/create' => 'policies#create'
-    post 'admin/policy/create/csv' => 'policies#create_by_csv'
-    get 'user/policies' => 'policies#show_user_policies'
+    get 'admin/policies' => 'admin_policies#index'
+    get 'admin/policies/user/:id' => 'admin_policies#show_policies_of_one_user'
+    post 'admin/policy/create' => 'admin_policies#create'
+    post 'admin/policy/create/csv' => 'admin_policies#create_by_csv'
+    get 'user/policies' => 'user_policies#show_user_policies'
 
     # Avatar Collections
     put 'user/avatar/upload' => 'users#upload_avatar'
