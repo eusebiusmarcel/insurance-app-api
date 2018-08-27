@@ -1,7 +1,5 @@
-class V1::PoliciesController < ApplicationController
-  before_action :authenticate_admin, 
-                only: %i[index show_policies_of_one_user create create_by_csv]
-  before_action :authenticate_user, only: %i[show_user_policies]
+class V1::AdminPoliciesController < ApplicationController
+  before_action :authenticate_admin
   def index
     policies = Policy.all.order(:id)
     render json: { status: 'OK', policies: policies }, status: :ok
@@ -14,7 +12,8 @@ class V1::PoliciesController < ApplicationController
   end
 
   def create
-    user = User.find(params[:user_id])
+    user = User.find_by(email: params[:user_email].downcase)
+    raise ActiveRecord::RecordNotFound, Message.user_email_unregistered if user.blank?
     policy = user.policies.new(policy_params)
     policy.balance = policy.limit_per_year
     policy.save!
@@ -24,10 +23,6 @@ class V1::PoliciesController < ApplicationController
 
   # def create_by_csv
   # end
-
-  def show_user_policies
-    render json: { status: 'OK', policies: current_user.policies }, status: :ok
-  end
 
   private
 

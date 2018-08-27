@@ -27,6 +27,16 @@ ActiveRecord::Schema.define(version: 2018_08_26_050658) do
     t.index ["email"], name: "index_admins_on_email", unique: true
   end
 
+  create_table "guests", force: :cascade do |t|
+    t.string "name"
+    t.string "email"
+    t.string "phone_number"
+    t.integer "insurance_type"
+    t.string "city"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "policies", force: :cascade do |t|
     t.string "policy_number"
     t.integer "user_id"
