@@ -14,7 +14,8 @@ class V1::PoliciesController < ApplicationController
   end
 
   def create
-    user = User.find(params[:user_id])
+    user = User.find_by(email: params[:user_email].downcase)
+    raise ActiveRecord::RecordNotFound, Message.user_email_unregistered if user.blank?
     policy = user.policies.new(policy_params)
     policy.balance = policy.limit_per_year
     policy.save!
