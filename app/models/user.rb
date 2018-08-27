@@ -9,8 +9,8 @@ class User < ApplicationRecord
   has_secure_password
   has_many :policies
   validates :name, presence: true, length: { in: 3..50 }
-  validates :email, presence: true, format: { with: EMAIL_REGEX }, 
-                    uniqueness: {case_sensitive: false }
+  validates :email, presence: true, format: { with: EMAIL_REGEX },
+                    uniqueness: { case_sensitive: false }
   validates :password, presence: true, length: { in: 6..30 }, allow_nil: true
   validates :id_card_number, presence: true, uniqueness: true, format: {
     with: ID_NUMBER_REGEX, message: 'terdiri dari 16 angka yang tertera di KTP' }
