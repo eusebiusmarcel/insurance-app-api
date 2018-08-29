@@ -17,7 +17,7 @@ class User < ApplicationRecord
   validates :gender, inclusion: {
     in: %w[P L], message: 'perempuan (P) atau laki-laki (L)? Masukkan L/P' }
   enum gender: { P: 0, L: 1 }
-  validates :phone_number, presence: true, format: { with: PHONE_REGEX }
+  validates :phone_number, presence: true, format: { with: PHONE_REGEX, message: Message.phone_regex }
   validates_presence_of :address, :place_of_birth, :date_of_birth
   validates :city, inclusion: 
   { in: %w[Jakarta Bandung Yogyakarta Surabaya Bali],
