@@ -34,4 +34,8 @@ class Message
   def self.user_email_unregistered
     'Email user tidak terdaftar'
   end
+
+  def self.phone_regex
+    'harus diawali dengan angka 62'
+  end
 end
