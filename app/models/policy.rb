@@ -1,6 +1,8 @@
 class Policy < ApplicationRecord
   belongs_to :user
-  validates :policy_number, presence: true, uniqueness: { case_sensitive: false }
+  before_save{ policy_number.upcase! }
+  validates :policy_number, presence: true, uniqueness: { case_sensitive: false },
+                            format: { with: POLICY_NUMBER_REGEX, message: Message.policy_number_regex }
   validates_presence_of :insured_item, :premium_per_month, :limit_per_year, :balance
   validates :payment_due_date, presence: true, inclusion: { 
     in: 1..28, message: 'pilih tanggal 1 sampai 28' }

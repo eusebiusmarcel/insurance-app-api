@@ -38,4 +38,8 @@ class Message
   def self.phone_regex
     'harus diawali dengan angka 62'
   end
+
+  def self.policy_number_regex
+    'diawali dengan 3 huruf, dilanjut dengan dash, dan 9 angka. Contoh: MDF-123456789'
+  end
 end
