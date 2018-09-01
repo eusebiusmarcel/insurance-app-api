@@ -1,4 +1,5 @@
 class Policy < ApplicationRecord
+  mount_uploader :document_url, PolicyDocumentUploader
   belongs_to :user
   before_save{ policy_number.upcase! }
   validates :policy_number, presence: true, uniqueness: { case_sensitive: false },
