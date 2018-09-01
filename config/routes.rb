@@ -28,6 +28,7 @@ Rails.application.routes.draw do
 
     # Payment Detail
     get 'admin/payment/detail/:policy_id' => 'payment_detail#detail'
+    post 'admin/payment/create' => 'payment_detail#create'
 
     # Avatar Collections
     put 'user/avatar/upload' => 'users#upload_avatar'
