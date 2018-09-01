@@ -24,6 +24,7 @@ Rails.application.routes.draw do
     post 'admin/policy/create' => 'admin_policies#create'
     post 'admin/policy/create/csv' => 'admin_policies#create_by_csv'
     get 'user/policies' => 'user_policies#show_user_policies'
+    put 'admin/policies/:id/document/upload' => 'admin_policies#upload_policy_document'
 
     # Payment Detail
     get 'admin/payment/detail/:policy_id' => 'payment_detail#detail'

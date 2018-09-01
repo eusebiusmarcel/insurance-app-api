@@ -15,7 +15,8 @@ class V1::GuestsController < ApplicationController
         guests = guests.guests_by_product(params[:insurance_type]) if params[:insurance_type].present?
         guests = guests.search_name(params[:name]) if params[:name].present?
         guests = guests.search_email(params[:email]) if params[:email].present?
-        render json: { status: "OK", guest: guests }, status: :ok
+        guests.blank? ? (render json: {status: "Not Found", message: ['guest not found']}, status: 404)
+                      : (render json: {status: "OK", guest: guests}, status: :ok)
     end
 
     private

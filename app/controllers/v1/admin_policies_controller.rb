@@ -24,6 +24,13 @@ class V1::AdminPoliciesController < ApplicationController
   # def create_by_csv
   # end
 
+  def upload_policy_document
+    policy = Policy.find(params[:id])
+    policy.remove_document_url! unless policy.document_url.blank?
+    policy.update!(params.permit(:document_url))
+    render json: { status: 'Document berhasil diupload.' }, status: :ok
+  end
+
   private
 
   def policy_params
