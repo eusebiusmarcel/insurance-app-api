@@ -18,11 +18,19 @@ class Policy < ApplicationRecord
     CSV.foreach(file.path, headers: true) do |row|
       policy = Policy.new(row.to_hash)
       if policy.save
-        @@created_policies.push(policies)
+        @@created_policies.push(policy)
       else
-        @@failed_to_created_policies.push()
+        @@failed_to_created_policies.push(policy)
         next
       end
     end
+  end
+
+  def self.created_policies
+    @@created_policies
+  end
+
+  def self.failed_to_created_policies
+    @@failed_to_created_policies
   end
 end
