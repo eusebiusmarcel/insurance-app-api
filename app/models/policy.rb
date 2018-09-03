@@ -1,6 +1,7 @@
 class Policy < ApplicationRecord
   mount_uploader :document_url, PolicyDocumentUploader
   belongs_to :user
+  has_many :payment_details
   before_save{ policy_number.upcase! }
   validates :policy_number, presence: true, uniqueness: { case_sensitive: false },
                             format: { with: POLICY_NUMBER_REGEX, message: Message.policy_number_regex }
