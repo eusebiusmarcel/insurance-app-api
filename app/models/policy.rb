@@ -14,7 +14,7 @@ class Policy < ApplicationRecord
   enum insurance_type: { 'Cyber Privacy Risk': 0, 'Mobile & Tablet': 1, 'Social Media Account': 2 }
   enum status: { active: 0, inactive: 1 }
 
-  def self.import(file)
+  def self.import!(file)
       @@created_policies, @@failed_to_created_policies = Array.new(2) { [] }
     CSV.foreach(file.path, headers: true) do |row|
       policy = Policy.new(row.to_hash)
