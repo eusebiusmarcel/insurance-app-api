@@ -32,7 +32,7 @@ class V1::AdminPoliciesController < ApplicationController
   end
 
   def created_policies
-    Policy.import!(params[:file])
+    Policy.import(params[:file])
     render json: { created_policies: Policy.created_policies.as_json(except: %i[policy_number user_id insured_item item_description insurance_type premium_per_mounth payment_per_mounth]),
         failed_to_created_policies: Policy.failed_to_created_policies.as_json(except: %i[policy_number user_id insured_item item_description insurance_type premium_per_mounth payment_per_mounth])}, status: :ok
   end
