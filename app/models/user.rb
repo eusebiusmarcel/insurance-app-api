@@ -1,5 +1,5 @@
 class User < ApplicationRecord
-  require 'csv'
+  
   include PasswordManagement
   mount_uploader :avatar, AvatarUploader
   
