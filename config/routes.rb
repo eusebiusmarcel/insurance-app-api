@@ -17,6 +17,7 @@ Rails.application.routes.draw do
     post 'admin/user/create/csv' => 'admins#create_user_by_csv'
     get 'admin/users' => 'admins#index_user'
     put 'admin/user/update/:id' => 'admins#update_user'
+    
 
     # Policy Collections
     get 'admin/policies' => 'admin_policies#index'
@@ -25,6 +26,8 @@ Rails.application.routes.draw do
     post 'admin/policy/create/csv' => 'admin_policies#create_by_csv'
     get 'user/policies' => 'user_policies#show_user_policies'
     put 'admin/policies/:id/document/upload' => 'admin_policies#upload_policy_document'
+    post 'admin/policies/import/csv' => 'admin_policies#create_policy_by_csv'
+    
 
     # Payment Detail
     get 'admin/payment/detail/:policy_id' => 'payment_detail#detail'

@@ -89,4 +89,5 @@ class V1::AdminsController < ApplicationController
         user.save!
         UserMailer.with(user: user).change_email.deliver
     end
+    
 end

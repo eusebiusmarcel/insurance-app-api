@@ -12,4 +12,10 @@ class Policy < ApplicationRecord
     message: 'Cyber Privacy Risk (0), Mobile & Tablet (1), atau Social Media Account (2)' }
   enum insurance_type: { 'Cyber Privacy Risk': 0, 'Mobile & Tablet': 1, 'Social Media Account': 2 }
   enum status: { active: 0, inactive: 1 }
+
+  def self.import!(file)
+    CSV.foreach(file.path, headers:true) do |row|
+      Policy.create! row.to_hash
+    end
+  end
 end
