@@ -16,7 +16,7 @@ class Policy < ApplicationRecord
 
   def self.import!(file)
     CSV.foreach(file.path, headers:true) do |row|
-      Policy.create! row.to_hash
+      Policy.created_policies! row.to_hash
     end
   end
 end
