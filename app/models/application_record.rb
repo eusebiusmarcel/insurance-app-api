@@ -1,6 +1,5 @@
 class ApplicationRecord < ActiveRecord::Base
   require 'csv'
-  paginates_per 10
   def initialize(*)
     super
   rescue ArgumentError
