@@ -1,8 +1,10 @@
 class Guest < ApplicationRecord
     before_save { email.downcase! }
+    paginates_per 10
+
     scope :guests_by_product, -> (insurance_type) { where insurance_type: insurance_type }
-    scope :search_name, -> (name) { where("name like ?", "%#{name}%")}
-    scope :search_email, -> (email) { where("email like ?", "#{email}%")}
+    scope :search_name, -> (name) { where("lower(name) LIKE lower('%#{name}%')")}
+    scope :search_email, -> (email) { where("lower(email) LIKE lower('#{email}%')")}
     validates :name, presence: true, length: { in: 3..50 }
     validates :email, presence: true, format: { with: EMAIL_REGEX },
                       uniqueness: { case_sensitive: false }
@@ -16,4 +18,5 @@ class Guest < ApplicationRecord
       message: 'Jakarta, Bandung, Yogyakarta, Surabaya, atau Bali?' }
     enum city: { Jakarta: 'Jakarta', Bandung: 'Bandung', Yogyakarta: 'Yogyakarta', 
       Surabaya: 'Surabaya', Bali: 'Bali' }
+
 end

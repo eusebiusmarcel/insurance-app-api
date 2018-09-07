@@ -42,4 +42,8 @@ class Message
   def self.policy_number_regex
     'diawali dengan 3 huruf, dilanjut dengan dash, dan 9 angka. Contoh: MDF-123456789'
   end
+
+  def self.policy_number_not_found
+    'nomor polis tidak ditemukan'
+  end
 end

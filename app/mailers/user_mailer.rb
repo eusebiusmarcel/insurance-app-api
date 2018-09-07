@@ -5,7 +5,7 @@ class UserMailer < ApplicationMailer
   end
 
   def forgot_password
-    @url = "https://quind-api.herokuapp.com/v1/user/reset/password/#{@user.reset_password_token}"
+    @url = "quind://user/reset/password/#{@user.reset_password_token}"
     mail to: @email_with_name, subject: "Hi #{@user.name}, this is your reset password link"
   end
 
