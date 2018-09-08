@@ -24,6 +24,7 @@
 - Admin Show Policies of One User
 - Admin Upload Policy Document
 - User Show Owned Policies
+- User Show Policy by ID
 
 ## Avatar Collection
 - User Upload Avatar
