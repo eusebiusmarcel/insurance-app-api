@@ -19,4 +19,15 @@ class Guest < ApplicationRecord
     enum city: { Jakarta: 'Jakarta', Bandung: 'Bandung', Yogyakarta: 'Yogyakarta', 
       Surabaya: 'Surabaya', Bali: 'Bali' }
 
+    def self.to_csv
+      attributes = %w{name email phone_number insurance_type city}
+
+      CSV.generate(headers: true) do |csv|
+        csv << attributes
+
+        all.each do |guests|
+          csv << guests.attributes.values_at(*attributes)
+        end
+      end
+    end
 end
