@@ -5,8 +5,7 @@ class UserMailer < ApplicationMailer
   end
 
   def forgot_password
-    @url = "quind://user/reset/password/#{@user.reset_password_token}"
-    mail to: @email_with_name, subject: "Hi #{@user.name}, this is your reset password link"
+    mail to: @email_with_name, subject: "Hi #{@user.name}, #{@user.reset_password_token} is your reset password token"
   end
 
   def change_email
