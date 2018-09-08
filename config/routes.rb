@@ -48,8 +48,9 @@ Rails.application.routes.draw do
     get 'policy/:id' => 'no_logins#show_policy'
 
     # Guest Collections
-    post  'guest/create' => 'guests#create_guest'
-    get   'guests' => 'guests#index_guest'
-    get   'guest/:id' => 'guests#show_guest'
+    post 'guest/create' => 'guests#create_guest'
+    get 'guests' => 'guests#index_guest'
+    get 'guest/:id' => 'guests#show_guest'
+    get 'guests/csv' => 'guests#export_to_csv'
   end
 end

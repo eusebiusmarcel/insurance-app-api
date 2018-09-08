@@ -19,6 +19,11 @@ class V1::GuestsController < ApplicationController
                       : (render json: {status: "OK", guest: guests}, status: :ok)
     end
 
+    def export_to_csv
+        @guests = Guest.all
+        send_data @guests.to_csv, filename: "Data_QUIND_GUEST #{Date.today}.csv"
+    end
+
     private
 
     def guest_params
