@@ -19,11 +19,15 @@ class Policy < ApplicationRecord
   def self.import!(file)
       @@created_policies, @@failed_to_created_policies = Array.new(2) { [] }
     CSV.foreach(file.path, headers: true) do |row|
-      policy = Policy.new(row.to_hash)
+      params = row.to_hash
+      user = User.find_by(email: params["email"].downcase)
+      raise ActiveRecord::RecordNotFound, Message.user_email_unregistered if user.blank?
+      policy = user.policies.new(params.except("email"))
+      policy.balance = policy.limit_per_year
       if policy.save
         @@created_policies.push(policy)
       else
-        @@failed_to_created_policies.push(policy)
+        @@failed_to_created_policies.push(policy_number: policy.policy_number, errors: policy.errors)
         next
       end
     end
