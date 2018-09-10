@@ -33,7 +33,6 @@ class V1::AdminPoliciesController < ApplicationController
 
   def created_policies
     Policy.import!(params[:file])
-    User.find_by(email: params[:email].downcase)
     raise ActiveRecord::RecordNotFound, Message.email_unregistered if user.blank?
     render json: { created_policies: Policy.created_policies.as_json(except: %i[policy_number User.email insured_item item_description insurance_type premium_per_month payment_per_month]),
         failed_to_created_policies: Policy.failed_to_created_policies.as_json(except: %i[policy_number user_id insured_item item_description insurance_type premium_per_month payment_per_month])}, status: :ok

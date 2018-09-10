@@ -22,7 +22,8 @@ class Policy < ApplicationRecord
   def self.import!(file)
       @@created_policies, @@failed_to_created_policies = Array.new(2) { [] }
     CSV.foreach(file.path, headers: true) do |row|
-      policy = Policy.new(row.to_hash)
+      user = User.find_by(email: params[:email].downcase)
+      policy = user.policies.new(row.to_hash)
       if policy.save
         @@created_policies.push(policy)
       else
