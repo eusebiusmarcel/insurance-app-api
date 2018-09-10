@@ -2,9 +2,6 @@ class Policy < ApplicationRecord
   mount_uploader :document_url, PolicyDocumentUploader
   belongs_to :user
   has_many :payment_details
-  before_save{ email.downcase! }
-  validates :email, presence: true, format: { with: EMAIL_REGEX },
-                    uniqueness: { case_sensitive: false }
   before_save{ policy_number.upcase! }
   paginates_per 10
 
@@ -24,11 +21,13 @@ class Policy < ApplicationRecord
     CSV.foreach(file.path, headers: true) do |row|
       params = row.to_hash
       user = User.find_by(email: params["email"].downcase)
+      raise ActiveRecord::RecordNotFound, Message.user_email_unregistered if user.blank?
       policy = user.policies.new(params.except("email"))
+      policy.balance = policy.limit_per_year
       if policy.save
         @@created_policies.push(policy)
       else
-        @@failed_to_created_policies.push(policy)
+        @@failed_to_created_policies.push(policy_number: policy.policy_number, errors: policy.errors)
         next
       end
     end
