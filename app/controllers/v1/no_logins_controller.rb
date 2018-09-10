@@ -17,7 +17,7 @@ class V1::NoLoginsController < ApplicationController
 
   def show_user
     user = User.find(params[:id])
-    render json: { status: 'OK', user: user }, status: :ok
+    render json: { status: 'OK', total_users: User.count, user: user }, status: :ok
   end
 
   def show_policy

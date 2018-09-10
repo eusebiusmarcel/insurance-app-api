@@ -41,7 +41,7 @@ class V1::AdminsController < ApplicationController
 
     def index_user
         users = User.order(:id).page(params[:page])
-        render json: { users: users.as_json(except:
+        render json: { status: 'OK', total_users: User.count, users: users.as_json(except:
         %i[password_digest reset_password_token reset_password_token_sent_at]) },
                status: :ok
     end
