@@ -11,12 +11,12 @@ class V1::GuestsController < ApplicationController
     end
 
     def index_guest
-        guests = Guest.order(:id).page(params[:page])
+        guests = Guest.order(:id)
         guests = guests.guests_by_product(params[:insurance_type]) if params[:insurance_type].present?
         guests = guests.search_name(params[:name]) if params[:name].present?
         guests = guests.search_email(params[:email]) if params[:email].present?
-        guests.blank? ? (render json: {status: "Not Found", message: ['guest not found']}, status: 404)
-                      : (render json: {status: "OK", guest: guests}, status: :ok)
+        guests_per_page = guests.page(params[:page])
+        render json: { status: "OK", total_guests: guests.count, guests: guests_per_page }, status: :ok
     end
 
     def export_to_csv

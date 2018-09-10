@@ -13,10 +13,12 @@ Rails.application.routes.draw do
     put 'admin/update/password' => 'admins#update_password'
     post 'admin/forgot/password' => 'admins#forgot_password'
     post 'admin/reset/password/:token' => 'admins#reset_password'
-    post 'admin/user/create' => 'admins#create_user'
-    post 'admin/user/create/csv' => 'admins#create_user_by_csv'
-    get 'admin/users' => 'admins#index_user'
-    put 'admin/user/update/:id' => 'admins#update_user'
+
+    # User Management Collections
+    post 'admin/user/create' => 'users_management#create'
+    post 'admin/user/create/csv' => 'users_management#create_by_csv'
+    get 'admin/users' => 'users_management#index'
+    put 'admin/user/update/:id' => 'users_management#update'
     
 
     # Policy Collections
@@ -27,7 +29,7 @@ Rails.application.routes.draw do
     get 'user/policies' => 'user_policies#index'
     get 'user/policies/:id' => 'user_policies#show'
     put 'admin/policies/:id/document/upload' => 'admin_policies#upload_policy_document'
-    post 'admin/policies/import/csv' => 'admin_policies#created_policies'
+    post 'admin/policies/import/csv' => 'admin_policies#create_by_csv'
     
 
     # Payment Detail

@@ -6,6 +6,8 @@
 - Admin Update Password
 - Admin Forgot Password
 - Admin Reset Password
+
+## Users Management Collection
 - Admin Create User
 - Admin Create Users by Uploading CSV File
 - Admin Show Users

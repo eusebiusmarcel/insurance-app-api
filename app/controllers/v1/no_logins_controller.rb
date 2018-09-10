@@ -1,7 +1,8 @@
 class V1::NoLoginsController < ApplicationController
   def index_user
-    users = User.order(:id).page(params[:page])
-    render json: { status: 'OK', users: users }, status: :ok
+    users = User.all.order(:id)
+    users_per_page = users.page(params[:page])
+    render json: { status: 'OK', total_users: users.count, users: users_per_page }, status: :ok
   end
 
   def index_policy
