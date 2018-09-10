@@ -31,10 +31,10 @@ class V1::AdminPoliciesController < ApplicationController
     render json: { status: 'Document berhasil diupload.' }, status: :ok
   end
 
-  def created_policies
+  def create_by_csv
     Policy.import!(params[:file])
-    render json: { created_policies: Policy.created_policies.as_json(except: %i[policy_number User.email insured_item item_description insurance_type premium_per_month payment_per_month]),
-        failed_to_created_policies: Policy.failed_to_created_policies.as_json(except: %i[policy_number user_id insured_item item_description insurance_type premium_per_month payment_per_month])}, status: :ok
+    render json: { created_policies: Policy.created_policies,
+        failed_to_created_policies: Policy.failed_to_created_policies }, status: :ok
   end
 
   private

@@ -27,7 +27,7 @@ Rails.application.routes.draw do
     get 'user/policies' => 'user_policies#index'
     get 'user/policies/:id' => 'user_policies#show'
     put 'admin/policies/:id/document/upload' => 'admin_policies#upload_policy_document'
-    post 'admin/policies/import/csv' => 'admin_policies#created_policies'
+    post 'admin/policies/import/csv' => 'admin_policies#create_by_csv'
     
 
     # Payment Detail

@@ -21,7 +21,7 @@ class Policy < ApplicationRecord
     CSV.foreach(file.path, headers: true) do |row|
       params = row.to_hash
       user = User.find_by(email: params["email"].downcase)
-      raise ActiveRecord::RecordNotFound, Message.user_email_unregistered if user.blank?
+      @@failed_to_created_policies.push(policy_number: params["policy_number"], errors: { email: ['not registered'] } ) && next if user.blank?
       policy = user.policies.new(params.except("email"))
       policy.balance = policy.limit_per_year
       if policy.save

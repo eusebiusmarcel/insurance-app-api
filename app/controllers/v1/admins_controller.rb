@@ -59,8 +59,8 @@ class V1::AdminsController < ApplicationController
 
     def create_user_by_csv
         User.import!(params[:file])
-        render json: { created_users: User.created_users.as_json(except: %i[password_digest reset_password_token reset_password_token_sent_at]),
-            failed_to_create_users: User.failed_to_create_users.as_json(except: %i[password_digest reset_password_token reset_password_token_sent_at])}, status: :ok
+        render json: { created_users: User.created_users,
+            failed_to_create_users: User.failed_to_create_users }, status: :ok
     end
 
     def update_user
