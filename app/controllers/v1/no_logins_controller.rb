@@ -1,7 +1,7 @@
 class V1::NoLoginsController < ApplicationController
   def index_user
     users = User.order(:id).page(params[:page])
-    render json: { status: 'OK', users: users }, status: :ok
+    render json: { status: 'OK', total_users: users.count, users: users }, status: :ok
   end
 
   def index_policy
@@ -17,7 +17,7 @@ class V1::NoLoginsController < ApplicationController
 
   def show_user
     user = User.find(params[:id])
-    render json: { status: 'OK', total_users: User.count, user: user }, status: :ok
+    render json: { status: 'OK', user: user }, status: :ok
   end
 
   def show_policy
