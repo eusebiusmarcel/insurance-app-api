@@ -23,7 +23,7 @@ class Policy < ApplicationRecord
       @@created_policies, @@failed_to_created_policies = Array.new(2) { [] }
     CSV.foreach(file.path, headers: true) do |row|
       params = row.to_hash
-      user = User.find_by(email: params[:email].downcase)
+      user = User.find_by(email: params["email"].downcase)
       policy = user.policies.new(params.except("email"))
       if policy.save
         @@created_policies.push(policy)
