@@ -2,6 +2,9 @@ class Policy < ApplicationRecord
   mount_uploader :document_url, PolicyDocumentUploader
   belongs_to :user
   has_many :payment_details
+  before_save{ email.downcase! }
+  validates :email, presence: true, format: { with: EMAIL_REGEX },
+                    uniqueness: { case_sensitive: false }
   before_save{ policy_number.upcase! }
   paginates_per 10
 
@@ -20,6 +23,7 @@ class Policy < ApplicationRecord
       @@created_policies, @@failed_to_created_policies = Array.new(2) { [] }
     CSV.foreach(file.path, headers: true) do |row|
       policy = Policy.new(row.to_hash)
+      policy.email.downcase! unless email.blank?
       if policy.save
         @@created_policies.push(policy)
       else
