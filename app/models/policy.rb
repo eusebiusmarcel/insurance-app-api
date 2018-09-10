@@ -25,6 +25,7 @@ class Policy < ApplicationRecord
       policy = user.policies.new(params.except("email"))
       policy.balance = policy.limit_per_year
       if policy.save
+        UserMailer.with(user: user, policy: policy).policy_registered.deliver
         @@created_policies.push(policy)
       else
         @@failed_to_created_policies.push(policy_number: policy.policy_number, errors: policy.errors)
