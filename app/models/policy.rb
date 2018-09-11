@@ -1,7 +1,7 @@
 class Policy < ApplicationRecord
   mount_uploader :document_url, PolicyDocumentUploader
   belongs_to :user
-  has_many :payment_details
+  has_many :payment_details, :claims
   before_save{ policy_number.upcase! }
 
   validates :policy_number, presence: true, uniqueness: { case_sensitive: false },
@@ -11,7 +11,7 @@ class Policy < ApplicationRecord
     in: 1..28, message: 'pilih tanggal 1 sampai 28' }
   validates :insurance_type, inclusion: {
     in: ['Cyber Privacy Risk', 'Mobile & Tablet', 'Social Media Account'],
-    message: 'Cyber Privacy Risk (0), Mobile & Tablet (1), atau Social Media Account (2)' }
+    message: 'Cyber Privacy Risk, Mobile & Tablet, atau Social Media Account' }
   enum insurance_type: { 'Cyber Privacy Risk': 0, 'Mobile & Tablet': 1, 'Social Media Account': 2 }
   enum status: { active: 0, inactive: 1 }
 
