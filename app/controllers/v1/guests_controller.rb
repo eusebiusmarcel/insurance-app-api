@@ -1,6 +1,6 @@
 class V1::GuestsController < ApplicationController
     before_action :set_guest, only: [:show_guest, :update_guest, :delete_guest]
-    before_action :authenticate_admin
+    before_action :authenticate_admin, except: :create
     def create
         guest = Guest.new(guest_params)
         guest.save!
