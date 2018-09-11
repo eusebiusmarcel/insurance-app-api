@@ -66,8 +66,6 @@ class User < ApplicationRecord
     end
   end
 
-  private
-
   def self.remove_if_exist_in_guest
     guest = Guest.find_by(email: user.email)
     guest.destroy unless guest.blank?
