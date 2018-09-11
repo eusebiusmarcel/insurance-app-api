@@ -1,57 +1,56 @@
 Rails.application.routes.draw do
+  mount ForestLiana::Engine => '/forest'
   namespace :v1 do
-    # User Collections
+    # User Collection
     get 'user' => 'users#show'
     post 'user/login' => 'authentications#authenticate_user'
     put 'user/update/password' => 'users#update_password'
     post 'user/forgot/password' => 'users#forgot_password'
     post 'user/reset/password/:token' => 'users#reset_password'
+    put 'user/avatar/upload' => 'users#upload_avatar'
+    delete 'user/avatar/delete' => 'users#delete_avatar'
 
-    # Admin Collections
+    # User Policy Collection
+    get 'user/policies' => 'user_policies#index'
+    get 'user/policies/:id' => 'user_policies#show'
+
+    # User Claim Collection
+    get 'user/claims' => 'user_claims#index'
+    get 'user/claims/:id' => 'user_claims#show'
+
+    # Admin Collection
     get 'admin' => 'admins#show'
     post 'admin/login' => 'authentications#authenticate_admin'
     put 'admin/update/password' => 'admins#update_password'
     post 'admin/forgot/password' => 'admins#forgot_password'
     post 'admin/reset/password/:token' => 'admins#reset_password'
-    post 'admin/user/create' => 'admins#create_user'
-    post 'admin/user/create/csv' => 'admins#create_user_by_csv'
-    get 'admin/users' => 'admins#index_user'
-    put 'admin/user/update/:id' => 'admins#update_user'
-    
 
-    # Policy Collections
-    get 'admin/policies' => 'admin_policies#index'
-    get 'admin/policies/user/:id' => 'admin_policies#show_policies_of_one_user'
-    post 'admin/policy/create' => 'admin_policies#create'
-    post 'admin/policy/create/csv' => 'admin_policies#create_by_csv'
-    get 'user/policies' => 'user_policies#index'
-    get 'user/policies/:id' => 'user_policies#show'
-    put 'admin/policies/:id/document/upload' => 'admin_policies#upload_policy_document'
-    post 'admin/policies/import/csv' => 'admin_policies#created_policies'
-    
+    # Users Management Collection
+    post 'admin/user/import/csv' => 'users_management#create_by_csv'
+    get 'admin/users' => 'users_management#index'
+    put 'admin/user/update/:id' => 'users_management#update'
 
-    # Payment Detail
+    # Policies Management Collection
+    get 'admin/policies' => 'policies_management#index'
+    get 'admin/policies/user/:id' => 'policies_management#show_policies_of_one_user'
+    put 'admin/policies/:id/document/upload' => 'policies_management#upload_policy_document'
+    post 'admin/policies/import/csv' => 'policies_management#create_by_csv'
+
+    # Claims Management Collection
+    get 'admin/claim' => 'claims_management#index'
+    get 'admin/claim/user/:id' => 'claims_management#show_claims_of_one_user'
+    post 'admin/claim/policy/:id/create' => 'claims_management#create'
+    put 'admin/claim/:id/status' => 'claims_management#change_status'
+
+    # Payment Detail Collection
     get 'admin/payment/detail/:policy_id' => 'payment_detail#detail'
     get 'user/payment/detail/:policy_id' => 'payment_detail#detail_by_user'
     post 'admin/payment/create' => 'payment_detail#create'
-
-    # Avatar Collections
-    put 'user/avatar/upload' => 'users#upload_avatar'
-    put 'admin/avatar/upload' => 'admins#upload_avatar'
-    delete 'user/avatar/delete' => 'users#delete_avatar'
-    delete 'admin/avatar/delete' => 'admins#delete_avatar'
-
-    # No Login Collections
-    get 'users' => 'no_logins#index_user'
-    get 'policies' => 'no_logins#index_policy'
-    get 'policies/user/:id' => 'no_logins#show_policies_of_one_user'
-    get 'user/:id' => 'no_logins#show_user'
-    get 'policy/:id' => 'no_logins#show_policy'
-
-    # Guest Collections
-    post 'guest/create' => 'guests#create_guest'
-    get 'guests' => 'guests#index_guest'
-    get 'guest/:id' => 'guests#show_guest'
+    
+    # Guest Collection
+    post 'guest/create' => 'guests#create'
+    get 'guests' => 'guests#index'
+    get 'guest/:id' => 'guests#show'
     get 'guests/csv' => 'guests#export_to_csv'
   end
 end

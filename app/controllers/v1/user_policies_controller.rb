@@ -1,7 +1,7 @@
 class V1::UserPoliciesController < ApplicationController
   before_action :authenticate_user
   def index
-    policies = current_user.policies.order(:id).page(params[:page])
+    policies = current_user.policies.all.order(:id)
     render json: { status: 'OK', policies: policies }, status: :ok
   end
 

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_08_31_122214) do
+ActiveRecord::Schema.define(version: 2018_09_11_121205) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -25,6 +25,18 @@ ActiveRecord::Schema.define(version: 2018_08_31_122214) do
     t.datetime "updated_at", null: false
     t.string "avatar"
     t.index ["email"], name: "index_admins_on_email", unique: true
+  end
+
+  create_table "claims", force: :cascade do |t|
+    t.integer "policy_id"
+    t.integer "amount"
+    t.integer "status", default: 0
+    t.datetime "requirements_accepted_at"
+    t.datetime "on_process_at"
+    t.datetime "success_or_rejected_at"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer "user_id"
   end
 
   create_table "guests", force: :cascade do |t|

@@ -37,7 +37,7 @@ module PasswordManagement
 
   def generate_reset_password_token!
     self.reset_password_token = generate_token
-    self.reset_password_token_sent_at = Time.now.utc
+    self.reset_password_token_sent_at = Time.now
     save!
   end
 
@@ -46,6 +46,6 @@ module PasswordManagement
   end
 
   def password_token_valid?
-    reset_password_token_sent_at + 4.hours > Time.now.utc
+    reset_password_token_sent_at + 4.hours > Time.now
   end
 end
