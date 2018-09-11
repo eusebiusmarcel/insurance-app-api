@@ -2,7 +2,6 @@ class User < ApplicationRecord
   
   include PasswordManagement
   mount_uploader :avatar, AvatarUploader
-  paginates_per 10
   
   scope :recently_created, -> { where("created_at > ?", Time.now - 10.minutes) }
 

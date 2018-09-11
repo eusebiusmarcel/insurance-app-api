@@ -1,6 +1,5 @@
 class Guest < ApplicationRecord
     before_save { email.downcase! }
-    paginates_per 10
 
     scope :guests_by_product, -> (insurance_type) { where insurance_type: insurance_type }
     scope :search_name, -> (name) { where("lower(name) LIKE lower('%#{name}%')")}
