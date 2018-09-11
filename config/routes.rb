@@ -25,16 +25,22 @@ Rails.application.routes.draw do
     post 'admin/forgot/password' => 'admins#forgot_password'
     post 'admin/reset/password/:token' => 'admins#reset_password'
 
-    # User Management Collection
+    # Users Management Collection
     post 'admin/user/import/csv' => 'users_management#create_by_csv'
     get 'admin/users' => 'users_management#index'
     put 'admin/user/update/:id' => 'users_management#update'
 
-    # Policy Management Collection
+    # Policies Management Collection
     get 'admin/policies' => 'policies_management#index'
     get 'admin/policies/user/:id' => 'policies_management#show_policies_of_one_user'
     put 'admin/policies/:id/document/upload' => 'policies_management#upload_policy_document'
     post 'admin/policies/import/csv' => 'policies_management#create_by_csv'
+
+    # Claims Management Collection
+    get 'admin/claim' => 'claims_management#index'
+    get 'admin/claim/policy/:id' => 'claims_management#show_claims_of_one_policy'
+    post 'admin/claim/policy/:id/create' => 'claims_management#create'
+    put 'admin/claim/:id/status' => 'claims_management#change_status'
 
     # Payment Detail Collection
     get 'admin/payment/detail/:policy_id' => 'payment_detail#detail'
