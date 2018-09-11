@@ -4,6 +4,9 @@ class User < ApplicationRecord
   mount_uploader :avatar, AvatarUploader
   
   scope :recently_created, -> { where("created_at > ?", Time.now - 10.minutes) }
+  scope :users_by_product, -> (insurance_type) { includes(:policies).where(policies: { insurance_type: insurance_type }) }
+  scope :search_name, -> (name) { where("lower(name) LIKE lower('%#{name}%')")}
+  scope :search_email, -> (email) { where("lower(email) LIKE lower('#{email}%')")}
 
   before_save { email.downcase! }
   has_secure_password

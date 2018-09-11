@@ -3,6 +3,9 @@ class V1::UsersManagementController < ApplicationController
 
   def index
     users = User.all.order(:id)
+    users = users.users_by_product(params[:insurance_type]) if params[:insurance_type].present?
+    users = users.search_name(params[:name]) if params[:name].present?
+    users = users.search_email(params[:email]) if params[:email].present?
     users_per_page = users.paginate(page: params[:page])
     render json: { status: 'OK', total_users: users.count, users: users_per_page }, status: :ok
   end
