@@ -13,7 +13,7 @@ class V1::PaymentDetailController < ApplicationController
     render json: { status: 'OK', detail: payment_detail }, status: :ok
   end
   def detail_by_user
-  	policy = Policy.find_by(id: params[:policy_id], user_id: current_user)
+  	 policy = Policy.find_by(id: params[:policy_id], user_id: current_user)
   	raise ActiveRecord::RecordNotFound, Message.policy_number_not_found if policy.blank?
     payment_detail = PaymentDetail.where(policy_id: params[:policy_id])
     render json: { status: 'OK', detail: payment_detail }, status: :ok

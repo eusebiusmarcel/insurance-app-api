@@ -59,7 +59,7 @@ class User < ApplicationRecord
   def insurance_type
     insurance_type = []
     policies.each do |policy|
-        insurance_type.push(policy.insurance_type) unless insurance_type.include?(policy.insurance_type)
+      insurance_type.push(policy.insurance_type) unless insurance_type.include?(policy.insurance_type)
     end
     insurance_type
   end
