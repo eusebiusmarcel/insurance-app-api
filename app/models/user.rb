@@ -1,33 +1,35 @@
 class User < ApplicationRecord
-  
   include PasswordManagement
+  include ValidateGender
+  include ValidateCity
+
   mount_uploader :avatar, AvatarUploader
-  
+  before_save { email.downcase! }
+  has_secure_password
+
+  has_many :policies
+  has_many :claims
+
   scope :recently_created, -> { where("created_at > ?", Time.now - 10.minutes) }
   scope :users_by_product, -> (insurance_type) { includes(:policies).where(policies: { insurance_type: insurance_type }) }
   scope :search_name, -> (name) { where("lower(name) LIKE lower('%#{name}%')")}
   scope :search_email, -> (email) { where("lower(email) LIKE lower('#{email}%')")}
 
-  before_save { email.downcase! }
-  has_secure_password
-  has_many :policies
-  has_many :claims
+  enum gender: { P: 0, L: 1 }
+  enum city: { Jakarta: 'Jakarta', Bandung: 'Bandung', Yogyakarta: 'Yogyakarta', 
+    Surabaya: 'Surabaya', Bali: 'Bali' }
+
   validates :name, presence: true, length: { in: 3..50 }
   validates :email, presence: true, format: { with: EMAIL_REGEX },
                     uniqueness: { case_sensitive: false }
   validates :password, presence: true, length: { in: 6..30 }, allow_nil: true
   validates :id_card_number, presence: true, uniqueness: true, format: {
     with: ID_NUMBER_REGEX, message: 'terdiri dari 16 angka yang tertera di KTP' }
-  validates :gender, inclusion: {
-    in: %w[P L], message: 'perempuan (P) atau laki-laki (L)? Masukkan L/P' }
-  enum gender: { P: 0, L: 1 }
   validates :phone_number, presence: true, format: { with: PHONE_REGEX, message: Message.phone_regex }
   validates_presence_of :address, :place_of_birth, :date_of_birth
-  validates :city, inclusion: 
-  { in: %w[Jakarta Bandung Yogyakarta Surabaya Bali],
-    message: 'Jakarta, Bandung, Yogyakarta, Surabaya, atau Bali?' }
-  enum city: { Jakarta: 'Jakarta', Bandung: 'Bandung', Yogyakarta: 'Yogyakarta', 
-               Surabaya: 'Surabaya', Bali: 'Bali' }
+
+  validate :gender_should_be_valid
+  validate :city_should_be_valid
 
   class << self
     attr_accessor :created_users, :failed_to_create_users

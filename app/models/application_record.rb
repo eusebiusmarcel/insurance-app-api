@@ -1,10 +1,4 @@
 class ApplicationRecord < ActiveRecord::Base
-  def initialize(*)
-    super
-  rescue ArgumentError
-    raise if valid?
-  end
-
   self.abstract_class = true
 
   EMAIL_REGEX = /\A[\w+\-.]+@(?!mailinator.com)[a-z\d\-]+(\.[a-z\d\-]+)*\.[a-z]+\z/i

@@ -25,9 +25,8 @@ class V1::ClaimsManagementController < ApplicationController
   def change_status
     @claim = Claim.find(params[:id])
     @status = params[:status]
-    claim.status = status
+    claim.update!(params.permit(:status))
     save_time_of_change_status
-    claim.save!
     render json: { status: 'OK', claim: claim }, status: :ok
   end
 
