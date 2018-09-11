@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  mount ForestLiana::Engine => '/forest'
   namespace :v1 do
     # User Collection
     get 'user' => 'users#show'
