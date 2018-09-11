@@ -46,4 +46,8 @@ class Message
   def self.policy_number_not_found
     'nomor polis tidak ditemukan'
   end
+
+  def self.no_imported_file
+    'tolong masukkan file yang ingin diimport'
+  end
 end
