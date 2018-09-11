@@ -21,6 +21,14 @@ class Policy < ApplicationRecord
   validate :insurance_type_should_be_valid
   validate :status_should_be_valid
 
+  def claim_status
+    claim_status = []
+    claims.each do |claim|
+      claim_status.push(claim.status) unless claim_status.include?(claim.status)
+    end
+    claim_status
+  end
+
   class << self
     attr_accessor :created_policies, :failed_to_created_policies
   end

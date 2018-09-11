@@ -54,4 +54,12 @@ class Message
   def self.already_registed_as_user
     'email telah terdaftar sebagai user, silahkan hubungi agen anda bila ingin membuat polis yang baru'
   end
+
+  def self.invalid_claim_amount
+    'claim amount exceeds balance'
+  end
+
+  def self.on_going_claim
+    'there is on going claim'
+  end
 end

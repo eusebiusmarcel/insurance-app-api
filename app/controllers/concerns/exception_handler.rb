@@ -8,6 +8,8 @@ module ExceptionHandler
   class InvalidToken < StandardError; end
   class ExpiredSignature < StandardError; end
   class AlreadyRegisteredAsUser < StandardError; end
+  class InvalidAmount < StandardError; end
+  class OnGoingClaim < StandardError; end
 
   included do
     rescue_from ActiveRecord::RecordInvalid, with: :four_twenty_two
@@ -18,6 +20,8 @@ module ExceptionHandler
     rescue_from ExceptionHandler::InvalidToken, with: :four_ninety_eight
     rescue_from ExceptionHandler::ExpiredSignature, with: :four_ninety_eight
     rescue_from ExceptionHandler::AlreadyRegisteredAsUser, with: :four_twenty_two
+    rescue_from ExceptionHandler::InvalidAmount, with: :four_twenty_two
+    rescue_from ExceptionHandler::OnGoingClaim, with: :four_twenty_two
 
     rescue_from ActiveRecord::RecordNotFound do |error|
       render json: { result: false, message: error.message }, status: :not_found
