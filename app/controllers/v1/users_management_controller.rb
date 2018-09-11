@@ -1,5 +1,6 @@
 class V1::UsersManagementController < ApplicationController
   before_action :authenticate_admin
+  attr_reader :old_email
 
   def index
     users = User.all.order(:id)
@@ -33,7 +34,7 @@ class V1::UsersManagementController < ApplicationController
   end
 
   def send_new_password_to_new_email(user)
-    return if user.email == @old_email
+    return if user.email == old_email
     user.password = user.generate_token
     user.save!
     UserMailer.with(user: user).change_email.deliver
