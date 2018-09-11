@@ -1,5 +1,18 @@
 # List APIs
 
+## User Collection
+- User Login
+- Show User Profile
+- User Update Password
+- User Forgot Password
+- User Reset Password
+- User Upload Avatar
+- User Delete Avatar
+
+## User Policy Collection
+- User Show Owned Policies
+- User Show Policy by ID
+
 ## Admin Collection
 - Admin Login
 - Show Admin Profile
@@ -13,33 +26,11 @@
 - Admin Show Users
 - Admin Update User
 
-## User Collection
-- User Login
-- Show User Profile
-- User Update Password
-- User Forgot Password
-- User Reset Password
-
-## Policy Collection
+## Policy Management Collection
 - Admin Create Policy
 - Admin Show Policies
 - Admin Show Policies of One User
 - Admin Upload Policy Document
-- User Show Owned Policies
-- User Show Policy by ID
-
-## Avatar Collection
-- User Upload Avatar
-- Admin Upload Avatar
-- User Delete Avatar
-- Admin Delete Avatar
-
-## No Login Collection
-- Show All Users
-- Show All Policies
-- Show Policies of One User
-- Show User by ID
-- Show Policy by ID
 
 ## Guest Collection
 - Create Guest
