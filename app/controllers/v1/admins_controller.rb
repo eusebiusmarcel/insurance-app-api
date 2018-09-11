@@ -1,8 +1,7 @@
 class V1::AdminsController < ApplicationController
     before_action :authenticate_admin, except: %i[forgot_password reset_password]
     def show
-        render json: { status: 'OK', admin: current_admin.as_json(except:
-        :password_digest) }, status: :ok
+        render json: { status: 'OK', admin: current_admin }, status: :ok
     end
 
     def update_password
