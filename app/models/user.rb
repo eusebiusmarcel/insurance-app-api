@@ -25,27 +25,23 @@ class User < ApplicationRecord
   enum city: { Jakarta: 'Jakarta', Bandung: 'Bandung', Yogyakarta: 'Yogyakarta', 
                Surabaya: 'Surabaya', Bali: 'Bali' }
 
+  class << self
+    attr_accessor :created_users, :failed_to_create_users
+  end
+
   def self.import!(file)
-    @@created_users, @@failed_to_create_users = Array.new(2) { [] }
+    @created_users, @failed_to_create_users = Array.new(2) { [] }
     CSV.foreach(file.path, headers: true) do |row|
       user = User.new(row.to_hash)
       user.email.downcase! unless user.email.blank?
       user.password = user.generate_token
       if user.save
         UserMailer.with(user: user).welcome.deliver
-        @@created_users.push(user)
+        created_users.push(user)
       else
-        @@failed_to_create_users.push(user_email: user.email, errors: user.errors)
+        failed_to_create_users.push(user_email: user.email, errors: user.errors)
         next
       end
     end
-  end
-
-  def self.created_users
-    @@created_users
-  end
-
-  def self.failed_to_create_users
-    @@failed_to_create_users
   end
 end
