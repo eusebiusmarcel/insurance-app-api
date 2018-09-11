@@ -1,7 +1,7 @@
 class V1::UserClaimsController < ApplicationController
   before_action :authenticate_user
   def index
-    claims = current_user.claims.all.order(:id)
+    claims = current_user.claims
     render json: { status: 'OK', claims: claims }, status: :ok
   end
 

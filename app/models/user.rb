@@ -11,6 +11,7 @@ class User < ApplicationRecord
   before_save { email.downcase! }
   has_secure_password
   has_many :policies
+  has_many :claims
   validates :name, presence: true, length: { in: 3..50 }
   validates :email, presence: true, format: { with: EMAIL_REGEX },
                     uniqueness: { case_sensitive: false }

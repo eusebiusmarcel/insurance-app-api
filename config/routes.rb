@@ -38,7 +38,7 @@ Rails.application.routes.draw do
 
     # Claims Management Collection
     get 'admin/claim' => 'claims_management#index'
-    get 'admin/claim/policy/:id' => 'claims_management#show_claims_of_one_policy'
+    get 'admin/claim/user/:id' => 'claims_management#show_claims_of_one_policy'
     post 'admin/claim/policy/:id/create' => 'claims_management#create'
     put 'admin/claim/:id/status' => 'claims_management#change_status'
 
