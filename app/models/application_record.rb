@@ -1,5 +1,4 @@
 class ApplicationRecord < ActiveRecord::Base
-  require 'csv'
   def initialize(*)
     super
   rescue ArgumentError

@@ -5,19 +5,6 @@ class V1::AdminsController < ApplicationController
         :password_digest) }, status: :ok
     end
 
-    def upload_avatar
-        current_admin.remove_avatar! unless current_admin.avatar.blank?
-        current_admin.update!(params.permit(:avatar))
-        render json: { status: 'Avatar berhasil diupload, silahkan lihat profile anda' }, 
-               status: :ok
-    end
-
-    def delete_avatar
-        current_admin.remove_avatar!
-        current_admin.save!
-        render json: { status: 'Avatar berhasil dihapus' }, status: :ok
-    end
-
     def update_password
         current_admin.process_update_password(params[:old_password], params[:password].to_s)
         render json: { status: 'OK', message: 'Password telah berhasil diubah' }, status: :ok

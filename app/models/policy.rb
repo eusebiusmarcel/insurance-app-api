@@ -3,7 +3,6 @@ class Policy < ApplicationRecord
   belongs_to :user
   has_many :payment_details
   before_save{ policy_number.upcase! }
-  paginates_per 10
 
   validates :policy_number, presence: true, uniqueness: { case_sensitive: false },
                             format: { with: POLICY_NUMBER_REGEX, message: Message.policy_number_regex }
@@ -16,29 +15,25 @@ class Policy < ApplicationRecord
   enum insurance_type: { 'Cyber Privacy Risk': 0, 'Mobile & Tablet': 1, 'Social Media Account': 2 }
   enum status: { active: 0, inactive: 1 }
 
+  class << self
+    attr_accessor :created_policies, :failed_to_created_policies
+  end
+
   def self.import!(file)
-      @@created_policies, @@failed_to_created_policies = Array.new(2) { [] }
+    @created_policies, @failed_to_created_policies = Array.new(2) { [] }
     CSV.foreach(file.path, headers: true) do |row|
       params = row.to_hash
       user = User.find_by(email: params["email"].downcase)
-      @@failed_to_created_policies.push(policy_number: params["policy_number"], errors: { email: ['not registered'] } ) && next if user.blank?
+      failed_to_created_policies.push(policy_number: params["policy_number"], errors: { email: ['not registered'] } ) && next if user.blank?
       policy = user.policies.new(params.except("email"))
       policy.balance = policy.limit_per_year
       if policy.save
         UserMailer.with(user: user, policy: policy).policy_registered.deliver
-        @@created_policies.push(policy)
+        created_policies.push(policy)
       else
-        @@failed_to_created_policies.push(policy_number: policy.policy_number, errors: policy.errors)
+        failed_to_created_policies.push(policy_number: policy.policy_number, errors: policy.errors)
         next
       end
     end
-  end
-
-  def self.created_policies
-    @@created_policies
-  end
-
-  def self.failed_to_created_policies
-    @@failed_to_created_policies
   end
 end

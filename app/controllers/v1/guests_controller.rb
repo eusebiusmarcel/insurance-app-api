@@ -1,21 +1,22 @@
 class V1::GuestsController < ApplicationController
     before_action :set_guest, only: [:show_guest, :update_guest, :delete_guest]
-    def create_guest
+    before_action :authenticate_admin, except: :create
+    def create
         guest = Guest.new(guest_params)
         guest.save!
         render json: { status: "Guest berhasil mendaftar"}, status: :ok
     end
 
-    def show_guest
+    def show
         render json:{ guest: @guest }, status: :ok
     end
 
-    def index_guest
-        guests = Guest.order(:id)
+    def index
+        guests = Guest.all.order(:id)
         guests = guests.guests_by_product(params[:insurance_type]) if params[:insurance_type].present?
         guests = guests.search_name(params[:name]) if params[:name].present?
         guests = guests.search_email(params[:email]) if params[:email].present?
-        guests_per_page = guests.page(params[:page])
+        guests_per_page = guests.paginate(page: params[:page])
         render json: { status: "OK", total_guests: guests.count, guests: guests_per_page }, status: :ok
     end
 
