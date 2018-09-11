@@ -7,7 +7,7 @@ class V1::ClaimsManagementController < ApplicationController
     render json: { status: 'OK', claims: claims }, status: :ok
   end
 
-  def show_claims_of_one_policy
+  def show_claims_of_one_user
     user = User.find(params[:id])
     claims = user.claims.all.order(:id)
     render json: { status: 'OK', claims: claims }, status: :ok
