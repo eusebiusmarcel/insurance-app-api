@@ -1,9 +1,13 @@
 class V1::GuestsController < ApplicationController
   before_action :set_guest, only: [:show_guest, :update_guest, :delete_guest]
   before_action :authenticate_admin, except: :create
+
   def create
     guest = Guest.new(guest_params)
+    user = User.find_by(email: params[:email])
+    raise ExceptionHandler::AlreadyRegisteredAsUser, Message.already_registed_as_user unless user.blank?
     guest.save!
+    GuestMailer.with(guest: guest).welcome.deliver
     render json: { status: "Guest berhasil mendaftar"}, status: :ok
   end
 
