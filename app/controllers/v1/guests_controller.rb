@@ -12,11 +12,11 @@ class V1::GuestsController < ApplicationController
     end
 
     def index
-        guests = Guest.order(:id)
+        guests = Guest.all.order(:id)
         guests = guests.guests_by_product(params[:insurance_type]) if params[:insurance_type].present?
         guests = guests.search_name(params[:name]) if params[:name].present?
         guests = guests.search_email(params[:email]) if params[:email].present?
-        guests_per_page = guests.page(params[:page])
+        guests_per_page = guests.paginate(page: params[:page])
         render json: { status: "OK", total_guests: guests.count, guests: guests_per_page }, status: :ok
     end
 

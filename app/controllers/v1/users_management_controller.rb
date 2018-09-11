@@ -11,7 +11,7 @@ class V1::UsersManagementController < ApplicationController
       end
       users_and_insurance_type.push(user: user, insurance_types: insurance_type)
     end
-    users_and_insurance_type_per_page = users_and_insurance_type
+    users_and_insurance_type_per_page = users_and_insurance_type.paginate(page: params[:page])
     render json: { status: 'OK', total_users: users.count, users: users_and_insurance_type_per_page }, status: :ok
   end
 

@@ -1,13 +1,13 @@
 class V1::PoliciesManagementController < ApplicationController
   before_action :authenticate_admin
   def index
-    policies = Policy.order(:id).page(params[:page])
+    policies = Policy.all.order(:id)
     render json: { status: 'OK', policies: policies }, status: :ok
   end
 
   def show_policies_of_one_user
     user = User.find(params[:id])
-    policies = user.policies.order(:id).page(params[:page])
+    policies = user.policies.all.order(:id)
     render json: { status: 'OK', policies: policies }, status: :ok
   end
 
