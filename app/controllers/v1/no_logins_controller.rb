@@ -1,8 +1,16 @@
 class V1::NoLoginsController < ApplicationController
   def index_user
-    users = User.all.order(:id)
-    users_per_page = users.page(params[:page])
-    render json: { status: 'OK', total_users: users.count, users: users_per_page }, status: :ok
+    users = User.includes(:policies).all.order(:id)
+    users_and_insurance_type = []
+    users.each do |user|
+      insurance_type = []
+      user.policies.each do |policy|
+        insurance_type.push(policy.insurance_type) unless insurance_type.include?(policy.insurance_type)
+      end
+      users_and_insurance_type.push(user: user, insurance_types: insurance_type)
+    end
+    users_and_insurance_type_per_page = users_and_insurance_type
+    render json: { status: 'OK', total_users: users.count, users: users_and_insurance_type_per_page }, status: :ok
   end
 
   def index_policy
