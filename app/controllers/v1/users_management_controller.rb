@@ -28,11 +28,6 @@ class V1::UsersManagementController < ApplicationController
 
   private
 
-  def user_params
-    params.permit(:name, :email, :id_card_number, :gender, :city,
-                  :address, :phone_number, :place_of_birth, :date_of_birth)
-  end
-
   def update_user_params
     params.permit(:email, :address, :phone_number)
   end
