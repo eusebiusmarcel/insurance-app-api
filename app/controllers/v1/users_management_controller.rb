@@ -1,18 +1,14 @@
 class V1::UsersManagementController < ApplicationController
   before_action :authenticate_admin
+  attr_reader :old_email
 
   def index
-    users = User.includes(:policies).all.order(:id)
-    users_and_insurance_type = []
-    users.each do |user|
-      insurance_type = []
-      user.policies.each do |policy|
-        insurance_type.push(policy.insurance_type) unless insurance_type.include?(policy.insurance_type)
-      end
-      users_and_insurance_type.push(user: user, insurance_types: insurance_type)
-    end
-    users_and_insurance_type_per_page = users_and_insurance_type.paginate(page: params[:page])
-    render json: { status: 'OK', total_users: users.count, users: users_and_insurance_type_per_page }, status: :ok
+    users = User.all.order(:id)
+    users = users.users_by_product(params[:insurance_type]) if params[:insurance_type].present?
+    users = users.search_name(params[:name]) if params[:name].present?
+    users = users.search_email(params[:email]) if params[:email].present?
+    users_per_page = users.paginate(page: params[:page])
+    render json: { status: 'OK', total_users: users.count, users: users_per_page }, status: :ok
   end
 
   def create_by_csv
@@ -33,17 +29,12 @@ class V1::UsersManagementController < ApplicationController
 
   private
 
-  def user_params
-    params.permit(:name, :email, :id_card_number, :gender, :city,
-                  :address, :phone_number, :place_of_birth, :date_of_birth)
-  end
-
   def update_user_params
     params.permit(:email, :address, :phone_number)
   end
 
   def send_new_password_to_new_email(user)
-    return if user.email == @old_email
+    return if user.email == old_email
     user.password = user.generate_token
     user.save!
     UserMailer.with(user: user).change_email.deliver

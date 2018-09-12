@@ -1,6 +1,6 @@
 class Message
   def self.unauthorized
-      'Anda tidak diizinkan untuk melakukan aksi ini.'
+    'Anda tidak diizinkan untuk melakukan aksi ini.'
   end
 
   def self.link_expired
@@ -40,10 +40,26 @@ class Message
   end
 
   def self.policy_number_regex
-    'diawali dengan 3 huruf, dilanjut dengan dash, dan 9 angka. Contoh: MDF-123456789'
+    'diawali dengan 3 huruf, dilanjut dengan dash, dan 9 angka, contoh: MDF-123456789'
   end
 
   def self.policy_number_not_found
     'nomor polis tidak ditemukan'
+  end
+
+  def self.no_imported_file
+    'tolong masukkan file yang ingin diimport'
+  end
+
+  def self.already_registed_as_user
+    'email telah terdaftar sebagai user, silahkan hubungi agen anda bila ingin membuat polis yang baru'
+  end
+
+  def self.invalid_claim_amount
+    'claim amount exceeds balance'
+  end
+
+  def self.on_going_claim
+    'there is on going claim'
   end
 end
