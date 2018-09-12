@@ -43,9 +43,9 @@ Rails.application.routes.draw do
     put 'admin/claim/:id/status' => 'claims_management#change_status'
 
     # Payment Detail Collection
-    get 'admin/payment/detail/:policy_id' => 'payment_detail#detail'
-    get 'user/payment/detail/:policy_id' => 'payment_detail#detail_by_user'
-    post 'admin/payment/create' => 'payment_detail#create'
+    get 'admin/payment/detail/:policy_id' => 'payments#detail'
+    get 'user/payment/detail/:policy_id' => 'payments#detail_by_user'
+    post 'admin/payment/create' => 'payments#create'
     
     # Guest Collection
     post 'guest/create' => 'guests#create'
