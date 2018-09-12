@@ -6,7 +6,7 @@ class Policy < ApplicationRecord
   before_save{ policy_number.upcase! }
 
   belongs_to :user
-  has_many :payment_detail
+  has_many :payments
   has_many :claims
 
   enum insurance_type: { 'Cyber Privacy Risk': 0, 'Mobile & Tablet': 1, 'Social Media Account': 2 }
