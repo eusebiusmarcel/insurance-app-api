@@ -36,7 +36,6 @@ Rails.application.routes.draw do
 
     # Policies Management Collection
     get 'admin/policies' => 'policies_management#index'
-    put 'admin/policies/:id/document/upload' => 'policies_management#upload_policy_document'
     post 'admin/policies/import/csv' => 'policies_management#create_by_csv'
 
     # Claims Management Collection
