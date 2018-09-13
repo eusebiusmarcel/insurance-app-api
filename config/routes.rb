@@ -18,6 +18,10 @@ Rails.application.routes.draw do
     get 'user/claims' => 'user_claims#index'
     get 'user/claims/:id' => 'user_claims#show'
 
+    # User Payment Collection
+    get 'user/payments' => 'user_payments#index'
+    get 'user/payments/:id' => 'user_payments#show'
+
     # Admin Collection
     get 'admin' => 'admins#show'
     post 'admin/login' => 'authentications#authenticate_admin'
@@ -32,7 +36,6 @@ Rails.application.routes.draw do
 
     # Policies Management Collection
     get 'admin/policies' => 'policies_management#index'
-    get 'admin/policies/user/:id' => 'policies_management#show_policies_of_one_user'
     put 'admin/policies/:id/document/upload' => 'policies_management#upload_policy_document'
     post 'admin/policies/import/csv' => 'policies_management#create_by_csv'
 
@@ -40,6 +43,10 @@ Rails.application.routes.draw do
     get 'admin/claim' => 'claims_management#index'
     post 'admin/claim/policy/:id/create' => 'claims_management#create'
     put 'admin/claim/:id/status' => 'claims_management#change_status'
+
+    # Payments Management Collection
+    get 'admin/payment' => 'payments_management#index'
+    post 'admin/payment/policy/:id/create' => 'payments_management#create'
 
     # Payment Detail Collection
     get 'admin/payment/detail/:policy_id' => 'payments#detail'
