@@ -18,6 +18,10 @@ Rails.application.routes.draw do
     get 'user/claims' => 'user_claims#index'
     get 'user/claims/:id' => 'user_claims#show'
 
+    # User Payment Collection
+    get 'user/payments' => 'user_payments#index'
+    get 'user/payments/:id' => 'user_payments#show'
+
     # Admin Collection
     get 'admin' => 'admins#show'
     post 'admin/login' => 'authentications#authenticate_admin'
@@ -32,25 +36,25 @@ Rails.application.routes.draw do
 
     # Policies Management Collection
     get 'admin/policies' => 'policies_management#index'
-    get 'admin/policies/user/:id' => 'policies_management#show_policies_of_one_user'
-    put 'admin/policies/:id/document/upload' => 'policies_management#upload_policy_document'
     post 'admin/policies/import/csv' => 'policies_management#create_by_csv'
 
     # Claims Management Collection
     get 'admin/claim' => 'claims_management#index'
-    get 'admin/claim/user/:id' => 'claims_management#show_claims_of_one_user'
     post 'admin/claim/policy/:id/create' => 'claims_management#create'
     put 'admin/claim/:id/status' => 'claims_management#change_status'
 
+    # Payments Management Collection
+    get 'admin/payment' => 'payments_management#index'
+    post 'admin/payment/policy/:id/create' => 'payments_management#create'
+
     # Payment Detail Collection
-    get 'admin/payment/detail/:policy_id' => 'payment_detail#detail'
-    get 'user/payment/detail/:policy_id' => 'payment_detail#detail_by_user'
-    post 'admin/payment/create' => 'payment_detail#create'
+    get 'admin/payment/detail/:policy_id' => 'payments#detail'
+    get 'user/payment/detail/:policy_id' => 'payments#detail_by_user'
+    post 'admin/payment/create' => 'payments#create'
     
     # Guest Collection
     post 'guest/create' => 'guests#create'
     get 'guests' => 'guests#index'
-    get 'guest/:id' => 'guests#show'
     get 'guests/csv' => 'guests#export_to_csv'
   end
 end

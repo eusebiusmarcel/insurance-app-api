@@ -9,6 +9,7 @@ class User < ApplicationRecord
 
   has_many :policies
   has_many :claims
+  has_many :payments
 
   scope :recently_created, -> { where("created_at > ?", Time.now - 10.minutes) }
   scope :users_by_product, -> (insurance_type) { includes(:policies).where(policies: { insurance_type: insurance_type }) }
