@@ -13,6 +13,14 @@
 - User Show Owned Policies
 - User Show Policy by ID
 
+## User Claim Collection
+- User Show Owned Claims
+- User Show Claim by ID
+
+## User Payment Collection
+- User Show Owned Payments
+- User Show Payment by ID
+
 ## Admin Collection
 - Admin Login
 - Show Admin Profile
@@ -21,18 +29,24 @@
 - Admin Reset Password
 
 ## Users Management Collection
-- Admin Create User
 - Admin Create Users by Uploading CSV File
 - Admin Show Users
 - Admin Update User
 
-## Policy Management Collection
-- Admin Create Policy
+## Policies Management Collection
+- Admin Create Policies by Uploading CSV File
 - Admin Show Policies
-- Admin Show Policies of One User
-- Admin Upload Policy Document
+
+## Claims Management Collection
+- Admin Show Claims
+- Admin Create Claim
+- Admin Change Claim Status
+
+## Payments Management Collection
+- Admin Show Payment
+- Admin Create Payment
 
 ## Guest Collection
 - Create Guest
-- Show Guest
-- Index Guest
+- Show All Guests
+- Export Guest to CSV
