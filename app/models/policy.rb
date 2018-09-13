@@ -41,6 +41,8 @@ class Policy < ApplicationRecord
       failed_to_created_policies.push(policy_number: params["policy_number"], errors: { email: ['not registered'] } ) && next if user.blank?
       policy = user.policies.new(params.except("email"))
       policy.balance = policy.limit_per_year
+      policy.payment_due_date = Time.now.strftime('%d').to_i if Time.now.strftime('%d').to_i <= 28
+      policy.payment_due_date = 28 if Time.now.strftime('%d').to_i > 28
       if policy.save
         UserMailer.with(user: user, policy: policy).policy_registered.deliver
         created_policies.push(policy)
