@@ -6,12 +6,6 @@ class V1::ClaimsManagementController < ApplicationController
     render json: { status: 'OK', claims: claims }, status: :ok
   end
 
-  def show_claims_of_one_user
-    user = User.find(params[:id])
-    claims = user.claims.all.order(:id)
-    render json: { status: 'OK', claims: claims }, status: :ok
-  end
-
   def create
     policy = Policy.find(params[:id])
     raise ExceptionHandler::OnGoingClaim, Message.on_going_claim if policy.claim_status.include?('Requirements Accepted') || policy.claim_status.include?('On Process')

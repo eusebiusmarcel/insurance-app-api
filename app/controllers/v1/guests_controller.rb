@@ -1,5 +1,4 @@
 class V1::GuestsController < ApplicationController
-  before_action :set_guest, only: [:show_guest, :update_guest, :delete_guest]
   before_action :authenticate_admin, except: :create
 
   def create
@@ -9,10 +8,6 @@ class V1::GuestsController < ApplicationController
     guest.save!
     GuestMailer.with(guest: guest).welcome.deliver
     render json: { status: "Guest berhasil mendaftar"}, status: :ok
-  end
-
-  def show
-    render json:{ guest: @guest }, status: :ok
   end
 
   def index
@@ -25,17 +20,13 @@ class V1::GuestsController < ApplicationController
   end
 
   def export_to_csv
-    @guests = Guest.all
-    send_data @guests.to_csv, filename: "Data_QUIND_GUEST #{Date.today}.csv"
+    guests = Guest.all
+    send_data guests.to_csv, filename: "Data_QUIND_GUEST #{Date.today}.csv"
   end
 
-    private
+  private
 
   def guest_params
     params.require(:guest).permit(:name, :email, :phone_number, :insurance_type, :city)
-  end
-
-  def set_guest
-    @guest = Guest.find(params[:id])
   end
 end
