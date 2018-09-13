@@ -56,7 +56,6 @@ Rails.application.routes.draw do
     # Guest Collection
     post 'guest/create' => 'guests#create'
     get 'guests' => 'guests#index'
-    get 'guest/:id' => 'guests#show'
     get 'guests/csv' => 'guests#export_to_csv'
   end
 end
